@@ -18,7 +18,7 @@
         extend: {
           colors: {
             navy: { DEFAULT: '#0A192F', light: '#112240', surface: '#162033', border: '#1E3A5F' },
-            gold: { DEFAULT: '#C5A059', light: '#D4AF37', dim: 'rgba(197,160,89,0.12)', faint: 'rgba(197,160,89,0.05)' }
+            gold: { DEFAULT: '#FFB830', light: '#FFD700', dim: 'rgba(255,184,48,0.15)', faint: 'rgba(255,184,48,0.06)' }
           },
           fontFamily: {
             display: ['Montserrat', 'sans-serif'],
@@ -34,10 +34,10 @@
       --navy:    #0A192F;
       --navyl:   #112240;
       --navys:   #162033;
-      --gold:    #C5A059;
-      --goldf:   #D4AF37;
-      --goldm:   rgba(212,175,55,0.12);
-      --goldfaint: rgba(212,175,55,0.05);
+      --gold:    #FFB830;
+      --goldf:   #FFD700;
+      --goldm:   rgba(255,184,48,0.15);
+      --goldfaint: rgba(255,184,48,0.06);
       --txt:     #CCD6F6;
       --muted:   #8892B0;
     }
@@ -84,7 +84,7 @@
     .text-muted { color: var(--muted); }
 
     .grad-gold {
-      background: linear-gradient(135deg, #C5A059 0%, #D4AF37 50%, #A07840 100%);
+      background: linear-gradient(135deg, #FFD700 0%, #FFB830 50%, #FF9500 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -108,7 +108,7 @@
       background: rgba(10,25,47,0.82);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid rgba(197,160,89,0.07);
+      border-bottom: 1px solid rgba(255,184,48,0.07);
       transition: border-color .3s;
     }
 
@@ -122,7 +122,7 @@
     /* ── BUTTONS ── */
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
-      background: linear-gradient(135deg, #C5A059, #8A6530);
+      background: linear-gradient(135deg, #FFD700, #FF9500);
       color: #0A192F; font-weight: 700; border-radius: 14px;
       padding: 14px 28px; font-size: .9rem; letter-spacing: .02em;
       transition: transform .25s, box-shadow .25s;
@@ -138,20 +138,20 @@
     .btn-primary:hover::before { left: 130%; }
     .btn-primary:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(197,160,89,0.28);
+      box-shadow: 0 12px 32px rgba(255,184,48,0.45);
     }
 
     .btn-ghost {
       display: inline-flex; align-items: center; gap: 8px;
-      border: 1px solid rgba(197,160,89,.3); color: var(--gold);
+      border: 1px solid rgba(255,184,48,.3); color: var(--gold);
       border-radius: 14px; padding: 13px 27px; font-size: .9rem;
       letter-spacing: .02em; transition: all .25s; font-weight: 600;
     }
     .btn-ghost:hover {
-      background: rgba(197,160,89,.07);
+      background: rgba(255,184,48,.07);
       border-color: var(--gold);
       transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(197,160,89,.12);
+      box-shadow: 0 8px 24px rgba(255,184,48,.12);
     }
 
     /* ── STORE BUTTONS ── */
@@ -163,8 +163,8 @@
       transition: all .25s; cursor: pointer;
     }
     .store-btn:hover {
-      background: rgba(197,160,89,.06);
-      border-color: rgba(197,160,89,.35);
+      background: rgba(255,184,48,.06);
+      border-color: rgba(255,184,48,.35);
       transform: translateY(-3px);
       box-shadow: 0 8px 24px rgba(0,0,0,.25);
     }
@@ -174,34 +174,34 @@
       background: rgba(22, 32, 51, 0.65);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(197,160,89,.1);
-      box-shadow: 0 8px 40px rgba(0,0,0,.3), inset 0 1px 0 rgba(197,160,89,.07);
+      border: 1px solid rgba(255,184,48,.1);
+      box-shadow: 0 8px 40px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,184,48,.07);
     }
 
     .glass-featured {
-      background: rgba(197,160,89,.05);
+      background: rgba(255,184,48,.05);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(197,160,89,.32);
-      box-shadow: 0 12px 60px rgba(197,160,89,.1), inset 0 1px 0 rgba(197,160,89,.18);
+      border: 1px solid rgba(255,184,48,.32);
+      box-shadow: 0 12px 60px rgba(255,184,48,.1), inset 0 1px 0 rgba(255,184,48,.18);
     }
 
     /* ── DIVIDER ── */
     .divider {
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(197,160,89,.18), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,184,48,.18), transparent);
     }
 
     /* ── STEP CIRCLE ── */
     .step-icon {
-      background: linear-gradient(135deg, rgba(197,160,89,.12), rgba(255,165,0,.05));
-      border: 1px solid rgba(197,160,89,.22);
-      box-shadow: 0 0 28px rgba(197,160,89,.08);
+      background: linear-gradient(135deg, rgba(255,184,48,.12), rgba(255,165,0,.05));
+      border: 1px solid rgba(255,184,48,.22);
+      box-shadow: 0 0 28px rgba(255,184,48,.08);
     }
     .step-icon-active {
-      background: linear-gradient(135deg, rgba(197,160,89,.2), rgba(255,165,0,.1));
-      border: 1px solid rgba(197,160,89,.38);
-      box-shadow: 0 0 40px rgba(197,160,89,.18);
+      background: linear-gradient(135deg, rgba(255,184,48,.2), rgba(255,165,0,.1));
+      border: 1px solid rgba(255,184,48,.38);
+      box-shadow: 0 0 40px rgba(255,184,48,.18);
     }
 
     /* ── PRICING CHECK ── */
@@ -215,8 +215,8 @@
 
     /* ── BADGE PULSE ── */
     @keyframes pulse-badge {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(197,160,89,.45); }
-      50%       { box-shadow: 0 0 0 10px rgba(197,160,89,.0); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,184,48,.45); }
+      50%       { box-shadow: 0 0 0 10px rgba(255,184,48,.0); }
     }
     .badge-pulse { animation: pulse-badge 2.2s ease infinite; }
 
@@ -250,20 +250,20 @@
 
     /* ── DISCLAIMER BOX ── */
     .disclaimer-box {
-      border-left: 3px solid rgba(197,160,89,.4);
-      background: rgba(197,160,89,.04);
+      border-left: 3px solid rgba(255,184,48,.4);
+      background: rgba(255,184,48,.04);
       border-radius: 0 12px 12px 0;
     }
 
     /* ── PHONE MOCKUP ── */
     .phone {
       background: linear-gradient(160deg, #1A2E4A 0%, #0F1F35 100%);
-      border: 2px solid rgba(197,160,89,.18);
+      border: 2px solid rgba(255,184,48,.18);
       border-radius: 42px;
       box-shadow:
         0 40px 80px rgba(0,0,0,.5),
-        0 0 0 1px rgba(197,160,89,.06),
-        inset 0 1px 0 rgba(197,160,89,.12);
+        0 0 0 1px rgba(255,184,48,.06),
+        inset 0 1px 0 rgba(255,184,48,.12);
       overflow: hidden;
       width: 260px;
       position: relative;
@@ -285,12 +285,12 @@
     .tag {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 7px 14px; border-radius: 100px;
-      background: rgba(197,160,89,.05);
-      border: 1px solid rgba(197,160,89,.14);
+      background: rgba(255,184,48,.05);
+      border: 1px solid rgba(255,184,48,.14);
       color: var(--muted); font-size: .82rem;
       transition: all .2s;
     }
-    .tag:hover { background: rgba(197,160,89,.09); border-color: rgba(197,160,89,.26); color: var(--txt); }
+    .tag:hover { background: rgba(255,184,48,.09); border-color: rgba(255,184,48,.26); color: var(--txt); }
 
     /* ── STAT ── */
     .stat-num {
@@ -302,19 +302,19 @@
     /* ── SOCIAL ICON ── */
     .social-icon {
       width: 36px; height: 36px; border-radius: 10px;
-      border: 1px solid rgba(197,160,89,.14);
+      border: 1px solid rgba(255,184,48,.14);
       display: flex; align-items: center; justify-content: center;
       transition: all .2s;
     }
     .social-icon:hover {
-      border-color: rgba(197,160,89,.4);
-      background: rgba(197,160,89,.07);
+      border-color: rgba(255,184,48,.4);
+      background: rgba(255,184,48,.07);
     }
 
     /* scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--navy); }
-    ::-webkit-scrollbar-thumb { background: rgba(197,160,89,.2); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,184,48,.2); border-radius: 3px; }
 
     /* ── RESPONSIVE — Tablet & Mobile (≤1023px) ── */
     @media (max-width: 1023px) {
@@ -485,7 +485,7 @@
 <section class="hero-section" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding-top:90px;">
 
   <!-- Background mesh -->
-  <div class="orb" style="width:500px;height:500px;background:rgba(197,160,89,.055);top:-120px;left:-100px;"></div>
+  <div class="orb" style="width:500px;height:500px;background:rgba(255,184,48,.055);top:-120px;left:-100px;"></div>
   <div class="orb" style="width:400px;height:350px;background:rgba(255,165,0,.03);bottom:0;right:-80px;"></div>
   <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 55% 40%,rgba(17,34,64,.5) 0%,transparent 80%);pointer-events:none;"></div>
 
@@ -501,7 +501,7 @@
       </div>
 
       <!-- Badge -->
-      <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;background:rgba(197,160,89,.07);border:1px solid rgba(197,160,89,.2);margin-bottom:28px;">
+      <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;background:rgba(255,184,48,.07);border:1px solid rgba(255,184,48,.2);margin-bottom:28px;">
         <span style="width:6px;height:6px;background:var(--gold);border-radius:50%;display:block;"></span>
         <span style="font-size:.72rem;color:var(--gold);font-weight:600;letter-spacing:.1em;text-transform:uppercase;">La IA pensada para México</span>
       </div>
@@ -546,7 +546,7 @@
       <!-- Social proof -->
       <div class="social-proof reveal d4" style="display:flex;align-items:center;gap:14px;">
         <div style="display:flex;">
-          <div style="width:30px;height:30px;border-radius:50%;border:2px solid var(--navy);background:linear-gradient(135deg,#C5A059,#FFA500);"></div>
+          <div style="width:30px;height:30px;border-radius:50%;border:2px solid var(--navy);background:linear-gradient(135deg,#FFD700,#FF9500);"></div>
           <div style="width:30px;height:30px;border-radius:50%;border:2px solid var(--navy);background:linear-gradient(135deg,#667EEA,#764BA2);margin-left:-8px;"></div>
           <div style="width:30px;height:30px;border-radius:50%;border:2px solid var(--navy);background:linear-gradient(135deg,#F093FB,#F5576C);margin-left:-8px;"></div>
           <div style="width:30px;height:30px;border-radius:50%;border:2px solid var(--navy);background:linear-gradient(135deg,#4FACFE,#00F2FE);margin-left:-8px;"></div>
@@ -561,7 +561,7 @@
     <div class="phone-wrap" style="display:flex;justify-content:center;align-items:center;">
       <div class="float" style="position:relative;">
         <!-- Glow -->
-        <div style="position:absolute;inset:-30px;background:radial-gradient(ellipse 80% 70% at 50% 50%,rgba(197,160,89,.11) 0%,transparent 70%);filter:blur(30px);"></div>
+        <div style="position:absolute;inset:-30px;background:radial-gradient(ellipse 80% 70% at 50% 50%,rgba(255,184,48,.11) 0%,transparent 70%);filter:blur(30px);"></div>
 
         <div class="phone" style="height:560px;">
           <!-- Status bar -->
@@ -589,7 +589,7 @@
           </div>
 
           <!-- Header -->
-          <div style="padding:10px 16px 8px;background:#0F1F35;border-bottom:1px solid rgba(197,160,89,.06);">
+          <div style="padding:10px 16px 8px;background:#0F1F35;border-bottom:1px solid rgba(255,184,48,.06);">
             <div class="f-display" style="font-weight:800;font-size:1rem;color:var(--gold);">Hoy</div>
             <div style="font-size:.68rem;color:var(--muted);">Lunes, 3 de marzo · 1,840 kcal meta</div>
           </div>
@@ -604,7 +604,7 @@
 
               <!-- ── OUTER RING: Calorías (red/orange) ── -->
               <!-- Track -->
-              <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(197,160,89,0.13)" stroke-width="10" stroke-linecap="round"/>
+              <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(255,184,48,0.13)" stroke-width="10" stroke-linecap="round"/>
               <!-- Progress: 68% -->
               <circle cx="80" cy="80" r="68" fill="none"
                 stroke="#EF5350" stroke-width="10" stroke-linecap="round"
@@ -615,7 +615,7 @@
 
               <!-- ── MIDDLE RING: Carbohidratos (teal-green) ── -->
               <!-- Track -->
-              <circle cx="80" cy="80" r="52" fill="none" stroke="rgba(197,160,89,0.13)" stroke-width="9" stroke-linecap="round"/>
+              <circle cx="80" cy="80" r="52" fill="none" stroke="rgba(255,184,48,0.13)" stroke-width="9" stroke-linecap="round"/>
               <!-- Progress: 73% -->
               <circle cx="80" cy="80" r="52" fill="none"
                 stroke="#26A69A" stroke-width="9" stroke-linecap="round"
@@ -626,7 +626,7 @@
 
               <!-- ── INNER RING: Grasas (blue/teal) ── -->
               <!-- Track -->
-              <circle cx="80" cy="80" r="37" fill="none" stroke="rgba(197,160,89,0.13)" stroke-width="8" stroke-linecap="round"/>
+              <circle cx="80" cy="80" r="37" fill="none" stroke="rgba(255,184,48,0.13)" stroke-width="8" stroke-linecap="round"/>
               <!-- Progress: 51% -->
               <circle cx="80" cy="80" r="37" fill="none"
                 stroke="#42A5F5" stroke-width="8" stroke-linecap="round"
@@ -691,7 +691,7 @@
             </div>
 
             <!-- Entry 2 -->
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 9px;border-radius:11px;background:rgba(197,160,89,.03);border:1px solid rgba(197,160,89,.07);">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 9px;border-radius:11px;background:rgba(255,184,48,.03);border:1px solid rgba(255,184,48,.07);">
               <div style="display:flex;align-items:center;gap:7px;">
                 <span style="font-size:1rem;">🥣</span>
                 <div>
@@ -703,7 +703,7 @@
             </div>
 
             <!-- Entry 3 -->
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 9px;border-radius:11px;background:rgba(197,160,89,.03);border:1px solid rgba(197,160,89,.07);">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 9px;border-radius:11px;background:rgba(255,184,48,.03);border:1px solid rgba(255,184,48,.07);">
               <div style="display:flex;align-items:center;gap:7px;">
                 <span style="font-size:1rem;">🍞</span>
                 <div>
@@ -716,13 +716,13 @@
           </div>
 
           <!-- Bottom nav -->
-          <div style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-around;align-items:center;padding:8px 10px 12px;background:#0A192F;border-top:1px solid rgba(197,160,89,.08);">
+          <div style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-around;align-items:center;padding:8px 10px 12px;background:#0A192F;border-top:1px solid rgba(255,184,48,.08);">
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--gold)"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
               <span style="font-size:.48rem;color:var(--gold);font-weight:600;">Inicio</span>
             </div>
             <div style="display:flex;flex-direction:column;align-items:center;gap:3px;margin-top:-18px;">
-              <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#C5A059,#FFA500);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(197,160,89,.3);">
+              <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#FFD700,#FF9500);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(255,184,48,.3);">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
               </div>
               <span style="font-size:.48rem;color:var(--gold);font-weight:600;">Escanear</span>
@@ -753,12 +753,12 @@
      HOW IT WORKS
      ============================================================ -->
 <section id="como-funciona" class="section-pad" style="padding:100px 24px;position:relative;overflow:hidden;">
-  <div class="orb" style="width:600px;height:350px;background:rgba(197,160,89,.04);top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+  <div class="orb" style="width:600px;height:350px;background:rgba(255,184,48,.04);top:50%;left:50%;transform:translate(-50%,-50%);"></div>
 
   <div style="max-width:960px;margin:0 auto;">
     <!-- Header -->
     <div style="text-align:center;margin-bottom:64px;">
-      <div class="reveal" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:100px;background:rgba(197,160,89,.06);border:1px solid rgba(197,160,89,.16);margin-bottom:20px;">
+      <div class="reveal" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:100px;background:rgba(255,184,48,.06);border:1px solid rgba(255,184,48,.16);margin-bottom:20px;">
         <span style="font-size:.72rem;color:var(--gold);font-weight:600;letter-spacing:.1em;text-transform:uppercase;">Así de simple</span>
       </div>
       <h2 class="f-display reveal d1" style="font-weight:800;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.025em;line-height:1.1;">
@@ -773,7 +773,7 @@
     <div class="steps-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;position:relative;">
 
       <!-- Connector (desktop) -->
-      <div style="position:absolute;top:56px;left:calc(33% + 32px);right:calc(33% + 32px);height:1px;background:linear-gradient(90deg,rgba(197,160,89,.3),rgba(197,160,89,.1));display:none;" class="hidden md:block"></div>
+      <div style="position:absolute;top:56px;left:calc(33% + 32px);right:calc(33% + 32px);height:1px;background:linear-gradient(90deg,rgba(255,184,48,.3),rgba(255,184,48,.1));display:none;" class="hidden md:block"></div>
 
       <!-- Step 1 -->
       <div class="reveal" style="text-align:center;">
@@ -808,7 +808,7 @@
       <div class="reveal d2" style="text-align:center;">
         <div class="step-icon" style="width:96px;height:96px;border-radius:24px;margin:0 auto 22px;display:flex;align-items:center;justify-content:center;">
           <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
-            <circle cx="21" cy="21" r="17" stroke="rgba(197,160,89,.15)" stroke-width="5"/>
+            <circle cx="21" cy="21" r="17" stroke="rgba(255,184,48,.15)" stroke-width="5"/>
             <circle cx="21" cy="21" r="17" stroke="var(--gold)" stroke-width="5" stroke-dasharray="107" stroke-dashoffset="32" stroke-linecap="round" transform="rotate(-90 21 21)"/>
             <circle cx="21" cy="21" r="9" stroke="rgba(255,165,0,.15)" stroke-width="4"/>
             <circle cx="21" cy="21" r="9" stroke="#FFA500" stroke-width="4" stroke-dasharray="57" stroke-dashoffset="18" stroke-linecap="round" transform="rotate(-90 21 21)"/>
@@ -868,12 +868,12 @@
      PRICING
      ============================================================ -->
 <section id="precios" class="section-pad" style="padding:100px 24px;position:relative;overflow:visible;background:linear-gradient(180deg,var(--navy) 0%,var(--navyl) 100%);">
-  <div class="orb" style="width:700px;height:400px;background:rgba(197,160,89,.04);top:50%;left:35%;transform:translate(-50%,-50%);pointer-events:none;position:absolute;filter:blur(90px);border-radius:50%;"></div>
+  <div class="orb" style="width:700px;height:400px;background:rgba(255,184,48,.04);top:50%;left:35%;transform:translate(-50%,-50%);pointer-events:none;position:absolute;filter:blur(90px);border-radius:50%;"></div>
 
   <div style="max-width:1000px;margin:0 auto;">
     <!-- Header -->
     <div style="text-align:center;margin-bottom:64px;">
-      <div class="reveal" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:100px;background:rgba(197,160,89,.06);border:1px solid rgba(197,160,89,.16);margin-bottom:20px;">
+      <div class="reveal" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:100px;background:rgba(255,184,48,.06);border:1px solid rgba(255,184,48,.16);margin-bottom:20px;">
         <span style="font-size:.72rem;color:var(--gold);font-weight:600;letter-spacing:.1em;text-transform:uppercase;">Sin letras chiquitas</span>
       </div>
       <h2 class="f-display reveal d1" style="font-weight:800;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.025em;line-height:1.1;">
@@ -945,12 +945,12 @@
           <div style="font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Pro</div>
           <div style="display:flex;align-items:baseline;gap:4px;">
             <div class="f-display" style="font-weight:800;font-size:3rem;color:var(--gold);line-height:1;">$49</div>
-            <div style="font-size:.9rem;color:rgba(197,160,89,.55);">MXN/mes</div>
+            <div style="font-size:.9rem;color:rgba(255,184,48,.55);">MXN/mes</div>
           </div>
-          <div style="font-size:.82rem;color:rgba(197,160,89,.5);margin-top:4px;margin-bottom:28px;">menos que 2 cafés de olla</div>
+          <div style="font-size:.82rem;color:rgba(255,184,48,.5);margin-top:4px;margin-bottom:28px;">menos que 2 cafés de olla</div>
         </div>
 
-        <div style="height:1px;background:rgba(197,160,89,.18);margin-bottom:24px;"></div>
+        <div style="height:1px;background:rgba(255,184,48,.18);margin-bottom:24px;"></div>
 
         <div style="display:flex;flex-direction:column;gap:0;margin-bottom:32px;">
           <div class="check-row included"><span class="check-mark">✓</span>100 escaneos al mes</div>
@@ -1053,6 +1053,9 @@
               Administrar Suscripción ↗
             </a>
           </li>
+          <li style="margin-top:20px;">
+            <img src="Programado en Mexico.png" alt="Programado en México" style="height:30px;width:auto;opacity:0.7;transition:opacity .2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'" />
+          </li>
         </ul>
       </div>
 
@@ -1116,8 +1119,8 @@
   const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     nav.style.borderBottomColor = window.scrollY > 60
-      ? 'rgba(197,160,89,.13)'
-      : 'rgba(197,160,89,.07)';
+      ? 'rgba(255,184,48,.13)'
+      : 'rgba(255,184,48,.07)';
   }, { passive: true });
 </script>
 </body>
