@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CalorIA Scan — La IA que entiende la comida mexicana</title>
+  <meta name="description" content="Escanea tu taco, tu pozole, tu concha. CalorIA Scan reconoce más de 300 platillos mexicanos y te muestra tus macros al instante. Sin culpas, solo datos." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { DEFAULT: '#0A192F', light: '#112240', surface: '#162033', border: '#1E3A5F' },
+            gold: { DEFAULT: '#C5A059', light: '#D4AF37', dim: 'rgba(197,160,89,0.12)', faint: 'rgba(197,160,89,0.05)' }
+          },
+          fontFamily: {
+            display: ['Montserrat', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --navy:    #0A192F;
+      --navyl:   #112240;
+      --navys:   #162033;
+      --gold:    #C5A059;
+      --goldf:   #D4AF37;
+      --goldm:   rgba(212,175,55,0.12);
+      --goldfaint: rgba(212,175,55,0.05);
+      --txt:     #CCD6F6;
+      --muted:   #8892B0;
+    }
+
+    /* ── APP ICON ── */
+    .app-icon-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 22px;
+      border: 1px solid rgba(212, 175, 55, 0.30);
+      box-shadow:
+        0 6px 28px rgba(212, 175, 55, 0.13),
+        0 1px 0 rgba(212, 175, 55, 0.12) inset,
+        0 0 0 4px rgba(212, 175, 55, 0.04);
+      background: rgba(10, 25, 47, 0.55);
+      padding: 5px;
+      backdrop-filter: blur(8px);
+    }
+    .app-icon-wrap img {
+      height: 64px;
+      width: 64px;
+      border-radius: 17px;
+      display: block;
+      object-fit: cover;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--txt);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .f-display { font-family: 'Montserrat', sans-serif; }
+
+    .text-gold { color: var(--gold); }
+    .text-muted { color: var(--muted); }
+
+    .grad-gold {
+      background: linear-gradient(135deg, #C5A059 0%, #D4AF37 50%, #A07840 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── BACKGROUND EFFECTS ── */
+    .grain-layer::after {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 999;
+      opacity: .35;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+    }
+
+    .orb {
+      position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none;
+    }
+
+    /* ── NAVBAR ── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,25,47,0.82);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(197,160,89,0.07);
+      transition: border-color .3s;
+    }
+
+    .nav-link {
+      color: var(--muted); font-size: .85rem;
+      letter-spacing: .06em; text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-link:hover { color: var(--gold); }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #C5A059, #8A6530);
+      color: #0A192F; font-weight: 700; border-radius: 14px;
+      padding: 14px 28px; font-size: .9rem; letter-spacing: .02em;
+      transition: transform .25s, box-shadow .25s;
+      position: relative; overflow: hidden;
+    }
+    .btn-primary::before {
+      content: ''; position: absolute;
+      top: -50%; left: -60%; width: 50%; height: 200%;
+      background: rgba(255,255,255,.18);
+      transform: skewX(-20deg);
+      transition: left .5s;
+    }
+    .btn-primary:hover::before { left: 130%; }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(197,160,89,0.28);
+    }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(197,160,89,.3); color: var(--gold);
+      border-radius: 14px; padding: 13px 27px; font-size: .9rem;
+      letter-spacing: .02em; transition: all .25s; font-weight: 600;
+    }
+    .btn-ghost:hover {
+      background: rgba(197,160,89,.07);
+      border-color: var(--gold);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(197,160,89,.12);
+    }
+
+    /* ── STORE BUTTONS ── */
+    .store-btn {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px; padding: 12px 20px;
+      transition: all .25s; cursor: pointer;
+    }
+    .store-btn:hover {
+      background: rgba(197,160,89,.06);
+      border-color: rgba(197,160,89,.35);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.25);
+    }
+
+    /* ── GLASS CARD ── */
+    .glass {
+      background: rgba(22, 32, 51, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(197,160,89,.1);
+      box-shadow: 0 8px 40px rgba(0,0,0,.3), inset 0 1px 0 rgba(197,160,89,.07);
+    }
+
+    .glass-featured {
+      background: rgba(197,160,89,.05);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(197,160,89,.32);
+      box-shadow: 0 12px 60px rgba(197,160,89,.1), inset 0 1px 0 rgba(197,160,89,.18);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(197,160,89,.18), transparent);
+    }
+
+    /* ── STEP CIRCLE ── */
+    .step-icon {
+      background: linear-gradient(135deg, rgba(197,160,89,.12), rgba(255,165,0,.05));
+      border: 1px solid rgba(197,160,89,.22);
+      box-shadow: 0 0 28px rgba(197,160,89,.08);
+    }
+    .step-icon-active {
+      background: linear-gradient(135deg, rgba(197,160,89,.2), rgba(255,165,0,.1));
+      border: 1px solid rgba(197,160,89,.38);
+      box-shadow: 0 0 40px rgba(197,160,89,.18);
+    }
+
+    /* ── PRICING CHECK ── */
+    .check-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 5px 0; font-size: .88rem; color: var(--muted);
+    }
+    .check-row.included { color: var(--txt); }
+    .check-mark { color: var(--gold); flex-shrink: 0; font-size: 1rem; }
+    .cross-mark { color: rgba(136,146,176,.35); flex-shrink: 0; }
+
+    /* ── BADGE PULSE ── */
+    @keyframes pulse-badge {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(197,160,89,.45); }
+      50%       { box-shadow: 0 0 0 10px rgba(197,160,89,.0); }
+    }
+    .badge-pulse { animation: pulse-badge 2.2s ease infinite; }
+
+    /* ── FLOAT ── */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33%       { transform: translateY(-10px) rotate(.4deg); }
+      66%       { transform: translateY(-5px) rotate(-.3deg); }
+    }
+    .float { animation: float 5s ease-in-out infinite; }
+
+    /* ── SCROLL BOUNCE ── */
+    @keyframes sbounce {
+      0%, 100% { transform: translateY(0); opacity: .7; }
+      50%       { transform: translateY(8px); opacity: .3; }
+    }
+    .scroll-bounce { animation: sbounce 1.8s ease-in-out infinite; }
+
+    /* ── REVEAL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .75s cubic-bezier(.16,1,.3,1), transform .75s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    .d1 { transition-delay: .08s; }
+    .d2 { transition-delay: .16s; }
+    .d3 { transition-delay: .24s; }
+    .d4 { transition-delay: .32s; }
+    .d5 { transition-delay: .40s; }
+
+    /* ── DISCLAIMER BOX ── */
+    .disclaimer-box {
+      border-left: 3px solid rgba(197,160,89,.4);
+      background: rgba(197,160,89,.04);
+      border-radius: 0 12px 12px 0;
+    }
+
+    /* ── PHONE MOCKUP ── */
+    .phone {
+      background: linear-gradient(160deg, #1A2E4A 0%, #0F1F35 100%);
+      border: 2px solid rgba(197,160,89,.18);
+      border-radius: 42px;
+      box-shadow:
+        0 40px 80px rgba(0,0,0,.5),
+        0 0 0 1px rgba(197,160,89,.06),
+        inset 0 1px 0 rgba(197,160,89,.12);
+      overflow: hidden;
+      width: 260px;
+      position: relative;
+    }
+
+    /* ── MACRO RINGS ── */
+    .ring-track { fill: none; }
+    .ring-fill   { fill: none; stroke-linecap: round; }
+    @keyframes ring-draw {
+      from { stroke-dashoffset: var(--dash-total); }
+      to   { stroke-dashoffset: var(--dash-offset); }
+    }
+    .ring-animated {
+      animation: ring-draw 1.4s cubic-bezier(.4,0,.2,1) both;
+      animation-delay: var(--anim-delay, 0s);
+    }
+
+    /* ── FEATURE TAG ── */
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 100px;
+      background: rgba(197,160,89,.05);
+      border: 1px solid rgba(197,160,89,.14);
+      color: var(--muted); font-size: .82rem;
+      transition: all .2s;
+    }
+    .tag:hover { background: rgba(197,160,89,.09); border-color: rgba(197,160,89,.26); color: var(--txt); }
+
+    /* ── STAT ── */
+    .stat-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 2rem; color: var(--gold);
+      line-height: 1;
+    }
+
+    /* ── SOCIAL ICON ── */
+    .social-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      border: 1px solid rgba(197,160,89,.14);
+      display: flex; align-items: center; justify-content: center;
+      transition: all .2s;
+    }
+    .social-icon:hover {
+      border-color: rgba(197,160,89,.4);
+      background: rgba(197,160,89,.07);
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: rgba(197,160,89,.2); border-radius: 3px; }
+
+    /* ── RESPONSIVE — Tablet & Mobile (≤1023px) ── */
+    @media (max-width: 1023px) {
+      /* Hero stacked layout */
+      .hero-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 48px !important;
+        padding-top: 24px !important;
+        padding-bottom: 48px !important;
+      }
+      .hero-copy {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-copy .store-row {
+        justify-content: center;
+      }
+      .hero-copy .social-proof {
+        justify-content: center;
+      }
+    }
+
+    /* ── Tablet (768px – 1023px) ── */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      /* Navbar: hide CTA button at md to prevent overflow */
+      .nav-cta { display: none !important; }
+
+      /* Hero text sizing */
+      .hero-copy h1 { font-size: clamp(2rem, 4vw, 3rem) !important; }
+
+      /* Phone mockup — scale down slightly for tablet */
+      .phone-wrap { transform: scale(0.92); transform-origin: center top; }
+
+      /* Pricing: 2 columns on tablet */
+      .pricing-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      /* Footer columns: 2 cols */
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+
+    /* ── Mobile (≤767px) ── */
+    @media (max-width: 767px) {
+      /* Navbar: hide links + CTA, show only logo */
+      .nav-links { display: none !important; }
+      .nav-cta   { display: none !important; }
+
+      /* Hero section */
+      .hero-section {
+        min-height: unset !important;
+        padding-top: 76px !important;
+        padding-bottom: 32px !important;
+      }
+
+      /* Hero text */
+      .hero-copy { text-align: center; align-items: center; }
+      .hero-copy h1 { font-size: clamp(1.9rem, 7vw, 2.8rem) !important; }
+      .hero-copy p  { font-size: .95rem !important; }
+
+      /* Phone mockup — full width on small screens */
+      .phone {
+        width: calc(100vw - 64px) !important;
+        max-width: 280px !important;
+      }
+      .phone-wrap { width: 100%; display: flex; justify-content: center; }
+
+      /* Sections: reduce padding */
+      .section-pad { padding: 64px 16px !important; }
+
+      /* How it works steps: single column */
+      .steps-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      /* Pricing: single column */
+      .pricing-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      /* Stats: 2×2 grid */
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      /* Footer: single column */
+      .footer-grid {
+        grid-template-columns: 1fr !important;
+        gap: 28px !important;
+      }
+    }
+
+    /* ── Very small phones (≤374px) ── */
+    @media (max-width: 374px) {
+      .hero-copy h1 { font-size: 1.7rem !important; }
+      .phone {
+        width: calc(100vw - 40px) !important;
+      }
+      .store-row { flex-direction: column !important; }
+    }
+  </style>
+</head>
+
+<body class="grain-layer">
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<nav id="navbar">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-3" style="text-decoration:none;">
+      <div style="width:38px;height:38px;border-radius:10px;overflow:hidden;flex-shrink:0;">
+        <!-- Inline corn SVG matching app icon aesthetic -->
+        <svg viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+          <rect width="38" height="38" rx="9" fill="#0A192F"/>
+          <!-- Corn body -->
+          <path d="M19 5 C15 5 12 9.5 12 16 C12 22 15.5 28 19 30 C22.5 28 26 22 26 16 C26 9.5 23 5 19 5Z"
+                fill="#C5A059" opacity=".92"/>
+          <!-- Kernels -->
+          <circle cx="16.5" cy="13" r="1.4" fill="#B8860B"/>
+          <circle cx="19"   cy="12" r="1.4" fill="#B8860B"/>
+          <circle cx="21.5" cy="13" r="1.4" fill="#B8860B"/>
+          <circle cx="16.5" cy="17" r="1.4" fill="#B8860B"/>
+          <circle cx="19"   cy="16" r="1.4" fill="#B8860B"/>
+          <circle cx="21.5" cy="17" r="1.4" fill="#B8860B"/>
+          <circle cx="16.5" cy="21" r="1.4" fill="#B8860B"/>
+          <circle cx="19"   cy="20" r="1.4" fill="#B8860B"/>
+          <circle cx="21.5" cy="21" r="1.4" fill="#B8860B"/>
+          <!-- Husks -->
+          <path d="M19 30 C17 32 14 32.5 12.5 30.5 C14.5 28.5 17 28.5 19 30Z" fill="#256B25"/>
+          <path d="M19 30 C21 32 24 32.5 25.5 30.5 C23.5 28.5 21 28.5 19 30Z" fill="#256B25"/>
+          <!-- Stem -->
+          <rect x="18" y="30" width="2" height="3.5" rx="1" fill="#8B5E0A"/>
+        </svg>
+      </div>
+      <span class="f-display" style="font-weight:800;font-size:1.1rem;letter-spacing:-.01em;">
+        <span style="color:var(--gold);">CalorIA</span><span style="color:var(--txt);">Scan</span>
+      </span>
+    </a>
+
+    <!-- Links -->
+    <div class="nav-links hidden md:flex items-center gap-8">
+      <a href="#como-funciona" class="nav-link">¿Cómo funciona?</a>
+      <a href="#precios"       class="nav-link">Precios</a>
+      <a href="#footer"        class="nav-link">Privacidad</a>
+    </div>
+
+    <!-- CTA -->
+    <a href="#precios" class="nav-cta btn-primary hidden md:inline-flex" style="padding:11px 22px;font-size:.82rem;">
+      Descargar Gratis
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</nav>
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero-section" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding-top:90px;">
+
+  <!-- Background mesh -->
+  <div class="orb" style="width:500px;height:500px;background:rgba(197,160,89,.055);top:-120px;left:-100px;"></div>
+  <div class="orb" style="width:400px;height:350px;background:rgba(255,165,0,.03);bottom:0;right:-80px;"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 55% 40%,rgba(17,34,64,.5) 0%,transparent 80%);pointer-events:none;"></div>
+
+  <div class="hero-grid max-w-6xl mx-auto px-6 py-16 grid lg:grid-cols-2 gap-16 items-center" style="width:100%;">
+
+    <!-- ── Left copy ── -->
+    <div class="hero-copy">
+      <!-- App Icon -->
+      <div class="reveal" style="margin-bottom:28px;">
+        <div class="app-icon-wrap">
+          <img src="icon for landing_page.png" alt="CalorIA Scan" />
+        </div>
+      </div>
+
+      <!-- Badge -->
+      <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;background:rgba(197,160,89,.07);border:1px solid rgba(197,160,89,.2);margin-bottom:28px;">
+        <span style="width:6px;height:6px;background:var(--gold);border-radius:50%;display:block;"></span>
+        <span style="font-size:.72rem;color:var(--gold);font-weight:600;letter-spacing:.1em;text-transform:uppercase;">La IA pensada para México</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="f-display reveal d1" style="font-weight:800;font-size:clamp(2.6rem,5.5vw,4.2rem);line-height:1.05;letter-spacing:-.025em;margin-bottom:22px;">
+        ¿Un taco más?<br>
+        <span class="grad-gold">Escanéalo</span> y<br>domina tus macros 🇲🇽
+      </h1>
+
+      <!-- Sub -->
+      <p class="reveal d2" style="font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:460px;margin-bottom:36px;">
+        La primera IA que entiende la comida mexicana. Desde tacos de canasta hasta conchas de la panadería.
+        <strong style="color:var(--txt);">Sin culpas, solo datos.</strong>
+      </p>
+
+      <!-- Store buttons -->
+      <div class="store-row reveal d3" style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:40px;">
+        <!-- App Store -->
+        <a href="#" class="store-btn">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="var(--gold)">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          <div>
+            <div style="font-size:.6rem;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;line-height:1;">Disponible en</div>
+            <div class="f-display" style="font-weight:700;font-size:.95rem;color:var(--txt);line-height:1.3;">App Store</div>
+          </div>
+        </a>
+
+        <!-- Google Play -->
+        <a href="#" class="store-btn">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="var(--gold)">
+            <path d="M3.18 23.76c.28.15.6.17.9.07l11.84-6.84-2.61-2.61-10.13 9.38zM.5 1.4C.18 1.7 0 2.16 0 2.73v18.54c0 .57.18 1.03.5 1.33l.07.07 10.39-10.39v-.23L.57 1.33.5 1.4zM21.77 10.41l-2.96-1.72-2.93 2.93 2.93 2.93 2.97-1.72c.85-.49.85-1.93-.01-2.42zM4.08.25L15.92 7.1 13.31 9.7 3.18.32C3.47.2 3.8.1 4.08.25z"/>
+          </svg>
+          <div>
+            <div style="font-size:.6rem;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;line-height:1;">Disponible en</div>
+            <div class="f-display" style="font-weight:700;font-size:.95rem;color:var(--txt);line-height:1.3;">Google Play</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Social proof -->
+      <div class="social-proof reveal d4" style="display:flex;align-items:center;gap:14px;">
+        <div style="display:flex;">
+          <div style="width:30px;height:30px;border-radius:50%;border:2px solid var(--navy);background:linear-gradient(135deg,#C5A059,#FFA500);"></div>
+          <div style="width:30px;height:30px;border-radius:50%;border:2px solid var(--navy);background:linear-gradient(135deg,#667EEA,#764BA2);margin-left:-8px;"></div>
+          <div style="width:30px;height:30px;border-radius:50%;border:2px solid var(--navy);background:linear-gradient(135deg,#F093FB,#F5576C);margin-left:-8px;"></div>
+          <div style="width:30px;height:30px;border-radius:50%;border:2px solid var(--navy);background:linear-gradient(135deg,#4FACFE,#00F2FE);margin-left:-8px;"></div>
+        </div>
+        <div>
+          <div style="color:var(--txt);font-size:.82rem;font-weight:600;line-height:1.4;max-width:280px;">Únete a los mexicanos que ya están dominando sus antojos y transformando su nutrición 🇲🇽</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Right: Phone mockup ── -->
+    <div class="phone-wrap" style="display:flex;justify-content:center;align-items:center;">
+      <div class="float" style="position:relative;">
+        <!-- Glow -->
+        <div style="position:absolute;inset:-30px;background:radial-gradient(ellipse 80% 70% at 50% 50%,rgba(197,160,89,.11) 0%,transparent 70%);filter:blur(30px);"></div>
+
+        <div class="phone" style="height:560px;">
+          <!-- Status bar -->
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 18px 6px;background:#0F1F35;">
+            <span style="font-size:.65rem;color:var(--muted);font-weight:600;">9:41</span>
+            <div style="width:60px;height:16px;border-radius:20px;background:#0A192F;"></div>
+            <div style="display:flex;align-items:center;gap:4px;">
+              <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+                <rect x="0" y="6" width="2.5" height="4" rx=".5" fill="#8892B0"/>
+                <rect x="3.5" y="4" width="2.5" height="6" rx=".5" fill="#8892B0"/>
+                <rect x="7" y="2" width="2.5" height="8" rx=".5" fill="#8892B0"/>
+                <rect x="10.5" y="0" width="2.5" height="10" rx=".5" fill="var(--gold)"/>
+              </svg>
+              <svg width="13" height="10" viewBox="0 0 20 14" fill="none">
+                <path d="M1 4C4.5 1 9 1 10 1C11 1 15.5 1 19 4" stroke="#8892B0" stroke-width="2" stroke-linecap="round"/>
+                <path d="M4 8C6 6 8 5 10 5C12 5 14 6 16 8" stroke="#8892B0" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="10" cy="11" r="1.5" fill="var(--gold)"/>
+              </svg>
+              <svg width="22" height="12" viewBox="0 0 22 12" fill="none">
+                <rect x="0" y="1" width="18" height="10" rx="2" stroke="#8892B0" stroke-width="1.5"/>
+                <path d="M19 4v4a2 2 0 000-4z" fill="#8892B0"/>
+                <rect x="1.5" y="2.5" width="11" height="7" rx="1" fill="var(--gold)"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Header -->
+          <div style="padding:10px 16px 8px;background:#0F1F35;border-bottom:1px solid rgba(197,160,89,.06);">
+            <div class="f-display" style="font-weight:800;font-size:1rem;color:var(--gold);">Hoy</div>
+            <div style="font-size:.68rem;color:var(--muted);">Lunes, 3 de marzo · 1,840 kcal meta</div>
+          </div>
+
+          <!-- Triple Concentric Macro Rings -->
+          <div style="background:#112240;padding:14px 14px 10px;display:flex;flex-direction:column;align-items:center;">
+            <!-- SVG triple ring — concentric, matches Flutter app -->
+            <svg viewBox="0 0 160 160" width="148" height="148" style="overflow:visible;">
+              <defs>
+                <!-- Sweep gradient helpers via filter trick: use simple solid colors + opacity -->
+              </defs>
+
+              <!-- ── OUTER RING: Calorías (red/orange) ── -->
+              <!-- Track -->
+              <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(197,160,89,0.13)" stroke-width="10" stroke-linecap="round"/>
+              <!-- Progress: 68% -->
+              <circle cx="80" cy="80" r="68" fill="none"
+                stroke="#EF5350" stroke-width="10" stroke-linecap="round"
+                stroke-dasharray="427.26" stroke-dashoffset="136.7"
+                transform="rotate(-90 80 80)"
+                class="ring-fill ring-animated"
+                style="--dash-total:427.26;--dash-offset:136.7;--anim-delay:.2s;"/>
+
+              <!-- ── MIDDLE RING: Carbohidratos (teal-green) ── -->
+              <!-- Track -->
+              <circle cx="80" cy="80" r="52" fill="none" stroke="rgba(197,160,89,0.13)" stroke-width="9" stroke-linecap="round"/>
+              <!-- Progress: 73% -->
+              <circle cx="80" cy="80" r="52" fill="none"
+                stroke="#26A69A" stroke-width="9" stroke-linecap="round"
+                stroke-dasharray="326.73" stroke-dashoffset="88.2"
+                transform="rotate(-90 80 80)"
+                class="ring-fill ring-animated"
+                style="--dash-total:326.73;--dash-offset:88.2;--anim-delay:.4s;"/>
+
+              <!-- ── INNER RING: Grasas (blue/teal) ── -->
+              <!-- Track -->
+              <circle cx="80" cy="80" r="37" fill="none" stroke="rgba(197,160,89,0.13)" stroke-width="8" stroke-linecap="round"/>
+              <!-- Progress: 51% -->
+              <circle cx="80" cy="80" r="37" fill="none"
+                stroke="#42A5F5" stroke-width="8" stroke-linecap="round"
+                stroke-dasharray="232.48" stroke-dashoffset="113.9"
+                transform="rotate(-90 80 80)"
+                class="ring-fill ring-animated"
+                style="--dash-total:232.48;--dash-offset:113.9;--anim-delay:.6s;"/>
+
+              <!-- ── Center text ── -->
+              <text x="80" y="72" text-anchor="middle" fill="#FFFFFF" font-size="18" font-family="Montserrat" font-weight="800">1,252</text>
+              <text x="80" y="84" text-anchor="middle" fill="#8892B0" font-size="9" font-family="Inter">kcal</text>
+
+              <!-- Micro legend dots below center text -->
+              <!-- Carbs dot + label -->
+              <circle cx="66" cy="96" r="3" fill="#26A69A"/>
+              <text x="71" y="99" fill="#26A69A" font-size="7.5" font-family="Inter" font-weight="600">168g</text>
+              <!-- Fat dot + label -->
+              <circle cx="92" cy="96" r="3" fill="#42A5F5"/>
+              <text x="97" y="99" fill="#42A5F5" font-size="7.5" font-family="Inter" font-weight="600">33g</text>
+            </svg>
+
+            <!-- Ring legend row -->
+            <div style="display:flex;gap:10px;margin-top:4px;justify-content:center;">
+              <div style="display:flex;align-items:center;gap:3px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#EF5350;display:inline-block;"></span>
+                <span style="font-size:.55rem;color:#8892B0;font-family:Inter,sans-serif;">Calorías</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:3px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#26A69A;display:inline-block;"></span>
+                <span style="font-size:.55rem;color:#8892B0;font-family:Inter,sans-serif;">Carbos</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:3px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#42A5F5;display:inline-block;"></span>
+                <span style="font-size:.55rem;color:#8892B0;font-family:Inter,sans-serif;">Grasas</span>
+              </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;width:100%;padding:0 2px;">
+              <span style="font-size:.62rem;color:var(--muted);">Meta: 1,840 kcal</span>
+              <span class="f-display" style="font-weight:800;font-size:.85rem;color:var(--gold);">68% completado</span>
+            </div>
+          </div>
+
+          <!-- Food list -->
+          <div style="background:#0F1F35;padding:8px 10px;display:flex;flex-direction:column;gap:5px;">
+            <div style="font-size:.58rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;padding:1px 0 3px;font-weight:600;">Escaneado hoy</div>
+
+            <!-- Entry 1 — highlighted "recently scanned" -->
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 9px;border-radius:11px;background:rgba(239,83,80,.07);border:1px solid rgba(239,83,80,.2);">
+              <div style="display:flex;align-items:center;gap:7px;">
+                <span style="font-size:1rem;">🌮</span>
+                <div>
+                  <div style="font-size:.65rem;font-weight:700;color:var(--txt);line-height:1.2;">Tacos al Pastor · 3 uds</div>
+                  <div style="display:flex;gap:5px;margin-top:2px;">
+                    <span style="font-size:.52rem;color:#26A69A;font-weight:600;">C: 48g</span>
+                    <span style="font-size:.52rem;color:#42A5F5;font-weight:600;">G: 18g</span>
+                    <span style="font-size:.52rem;color:#8892B0;">· Almuerzo</span>
+                  </div>
+                </div>
+              </div>
+              <span style="font-size:.68rem;font-weight:800;color:#EF5350;">540 kcal</span>
+            </div>
+
+            <!-- Entry 2 -->
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 9px;border-radius:11px;background:rgba(197,160,89,.03);border:1px solid rgba(197,160,89,.07);">
+              <div style="display:flex;align-items:center;gap:7px;">
+                <span style="font-size:1rem;">🥣</span>
+                <div>
+                  <div style="font-size:.65rem;font-weight:600;color:var(--txt);line-height:1.2;">Chilaquiles Verdes</div>
+                  <div style="font-size:.52rem;color:var(--muted);margin-top:1px;">Desayuno · 8:00 AM</div>
+                </div>
+              </div>
+              <span style="font-size:.68rem;font-weight:700;color:var(--gold);">612 kcal</span>
+            </div>
+
+            <!-- Entry 3 -->
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 9px;border-radius:11px;background:rgba(197,160,89,.03);border:1px solid rgba(197,160,89,.07);">
+              <div style="display:flex;align-items:center;gap:7px;">
+                <span style="font-size:1rem;">🍞</span>
+                <div>
+                  <div style="font-size:.65rem;font-weight:600;color:var(--txt);line-height:1.2;">Concha de Vainilla</div>
+                  <div style="font-size:.52rem;color:var(--muted);margin-top:1px;">Snack · 4:00 PM</div>
+                </div>
+              </div>
+              <span style="font-size:.68rem;font-weight:700;color:var(--gold);">100 kcal</span>
+            </div>
+          </div>
+
+          <!-- Bottom nav -->
+          <div style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-around;align-items:center;padding:8px 10px 12px;background:#0A192F;border-top:1px solid rgba(197,160,89,.08);">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--gold)"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+              <span style="font-size:.48rem;color:var(--gold);font-weight:600;">Inicio</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;margin-top:-18px;">
+              <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#C5A059,#FFA500);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(197,160,89,.3);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A192F" stroke-width="2.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              </div>
+              <span style="font-size:.48rem;color:var(--gold);font-weight:600;">Escanear</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8892B0" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span style="font-size:.48rem;color:var(--muted);">Historial</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div style="position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;">
+    <span style="font-size:.65rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;">Descubre más</span>
+    <div class="scroll-bounce">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" opacity=".55"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================
+     HOW IT WORKS
+     ============================================================ -->
+<section id="como-funciona" class="section-pad" style="padding:100px 24px;position:relative;overflow:hidden;">
+  <div class="orb" style="width:600px;height:350px;background:rgba(197,160,89,.04);top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+
+  <div style="max-width:960px;margin:0 auto;">
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:64px;">
+      <div class="reveal" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:100px;background:rgba(197,160,89,.06);border:1px solid rgba(197,160,89,.16);margin-bottom:20px;">
+        <span style="font-size:.72rem;color:var(--gold);font-weight:600;letter-spacing:.1em;text-transform:uppercase;">Así de simple</span>
+      </div>
+      <h2 class="f-display reveal d1" style="font-weight:800;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.025em;line-height:1.1;">
+        Tu fonda de bolsillo,<br><span class="grad-gold">inteligente</span>
+      </h2>
+      <p class="reveal d2" style="color:var(--muted);font-size:1rem;max-width:480px;margin:16px auto 0;line-height:1.75;">
+        En menos de 10 segundos sabes exactamente qué comiste y cómo afecta tus metas del día.
+      </p>
+    </div>
+
+    <!-- Steps grid -->
+    <div class="steps-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;position:relative;">
+
+      <!-- Connector (desktop) -->
+      <div style="position:absolute;top:56px;left:calc(33% + 32px);right:calc(33% + 32px);height:1px;background:linear-gradient(90deg,rgba(197,160,89,.3),rgba(197,160,89,.1));display:none;" class="hidden md:block"></div>
+
+      <!-- Step 1 -->
+      <div class="reveal" style="text-align:center;">
+        <div class="step-icon" style="width:96px;height:96px;border-radius:24px;margin:0 auto 22px;display:flex;align-items:center;justify-content:center;">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
+            <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+        </div>
+        <div style="font-size:.68rem;font-weight:700;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px;">Paso 01</div>
+        <h3 class="f-display" style="font-weight:700;font-size:1.15rem;margin-bottom:10px;">Abre la cámara</h3>
+        <p style="color:var(--muted);font-size:.88rem;line-height:1.7;">Un toque y listo. Sin formularios, sin búsquedas eternas. Solo apunta tu cámara al plato.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="reveal d1" style="text-align:center;">
+        <div class="step-icon-active" style="width:96px;height:96px;border-radius:24px;margin:0 auto 22px;display:flex;align-items:center;justify-content:center;">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
+            <path d="M3 7V5a2 2 0 012-2h2" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M17 3h2a2 2 0 012 2v2" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M21 17v2a2 2 0 01-2 2h-2" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M7 21H5a2 2 0 01-2-2v-2" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="3" y1="12" x2="21" y2="12" stroke="var(--goldf)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3 2"/>
+          </svg>
+        </div>
+        <div style="font-size:.68rem;font-weight:700;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px;">Paso 02</div>
+        <h3 class="f-display" style="font-weight:700;font-size:1.15rem;margin-bottom:10px;">Escanea tu plato</h3>
+        <p style="color:var(--muted);font-size:.88rem;line-height:1.7;">Desde chilaquiles verdes hasta una concha de la panadería. Nuestra IA reconoce más de 300 platillos mexicanos.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="reveal d2" style="text-align:center;">
+        <div class="step-icon" style="width:96px;height:96px;border-radius:24px;margin:0 auto 22px;display:flex;align-items:center;justify-content:center;">
+          <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
+            <circle cx="21" cy="21" r="17" stroke="rgba(197,160,89,.15)" stroke-width="5"/>
+            <circle cx="21" cy="21" r="17" stroke="var(--gold)" stroke-width="5" stroke-dasharray="107" stroke-dashoffset="32" stroke-linecap="round" transform="rotate(-90 21 21)"/>
+            <circle cx="21" cy="21" r="9" stroke="rgba(255,165,0,.15)" stroke-width="4"/>
+            <circle cx="21" cy="21" r="9" stroke="#FFA500" stroke-width="4" stroke-dasharray="57" stroke-dashoffset="18" stroke-linecap="round" transform="rotate(-90 21 21)"/>
+          </svg>
+        </div>
+        <div style="font-size:.68rem;font-weight:700;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px;">Paso 03</div>
+        <h3 class="f-display" style="font-weight:700;font-size:1.15rem;margin-bottom:10px;">Mira cómo se llenan tus anillos</h3>
+        <p style="color:var(--muted);font-size:.88rem;line-height:1.7;">Proteína, carbos y grasas visualizados al instante. ¿Te pasaste? Lo verás claro para ajustar sin culpas.</p>
+      </div>
+    </div>
+
+    <!-- Food tags -->
+    <div class="reveal d3" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:56px;">
+      <span class="tag">🌮 Tacos & Antojitos</span>
+      <span class="tag">🥣 Platillos de Fonda</span>
+      <span class="tag">🍞 Pan Dulce</span>
+      <span class="tag">🌶️ Salsas & Guisos</span>
+      <span class="tag">🫔 Burritos & Quesadillas</span>
+      <span class="tag">🍲 Sopas & Caldos</span>
+      <span class="tag">🥑 Guacamole</span>
+      <span class="tag">+300 más</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================
+     STATS BAR
+     ============================================================ -->
+<section style="background:var(--navyl);padding:48px 24px;">
+  <div class="stats-grid" style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;text-align:center;">
+    <div class="reveal">
+      <div class="stat-num">+300</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-top:4px;">Platillos mexicanos</div>
+    </div>
+    <div class="reveal d1">
+      <div class="stat-num">&lt;5s</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-top:4px;">Para reconocer tu plato</div>
+    </div>
+    <div class="reveal d2">
+      <div class="stat-num">100%</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-top:4px;">Privacidad de tus datos</div>
+    </div>
+    <div class="reveal d3">
+      <div class="stat-num">iOS & Android</div>
+      <div style="font-size:.8rem;color:var(--muted);margin-top:4px;">Descarga disponible</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================
+     PRICING
+     ============================================================ -->
+<section id="precios" class="section-pad" style="padding:100px 24px;position:relative;overflow:visible;background:linear-gradient(180deg,var(--navy) 0%,var(--navyl) 100%);">
+  <div class="orb" style="width:700px;height:400px;background:rgba(197,160,89,.04);top:50%;left:35%;transform:translate(-50%,-50%);pointer-events:none;position:absolute;filter:blur(90px);border-radius:50%;"></div>
+
+  <div style="max-width:1000px;margin:0 auto;">
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:64px;">
+      <div class="reveal" style="display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:100px;background:rgba(197,160,89,.06);border:1px solid rgba(197,160,89,.16);margin-bottom:20px;">
+        <span style="font-size:.72rem;color:var(--gold);font-weight:600;letter-spacing:.1em;text-transform:uppercase;">Sin letras chiquitas</span>
+      </div>
+      <h2 class="f-display reveal d1" style="font-weight:800;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.025em;line-height:1.1;">
+        Elige tu plan,<br><span class="grad-gold">sin compromisos</span>
+      </h2>
+      <p class="reveal d2" style="color:var(--muted);font-size:1rem;max-width:460px;margin:16px auto 0;line-height:1.75;">
+        Empieza gratis y sube cuando quieras. Cancela cuando tú decidas. Sin trampa.
+      </p>
+    </div>
+
+    <!-- Cards -->
+    <div class="pricing-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;align-items:start;">
+
+      <!-- FREE -->
+      <div class="glass reveal" style="border-radius:24px;padding:32px 28px;">
+        <div style="font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Gratuito</div>
+        <div class="f-display" style="font-weight:800;font-size:3rem;color:var(--txt);line-height:1;">$0</div>
+        <div style="font-size:.82rem;color:var(--muted);margin-top:4px;margin-bottom:28px;">para siempre</div>
+        <div class="divider" style="margin-bottom:24px;"></div>
+
+        <div style="display:flex;flex-direction:column;gap:0;margin-bottom:32px;">
+          <div class="check-row included"><span class="check-mark">✓</span>5 escaneos al mes</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Calorías básicas</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Historial de 7 días</div>
+          <div class="check-row"><span class="cross-mark">✗</span>Con anuncios</div>
+          <div class="check-row"><span class="cross-mark">✗</span>Sin anillos de macros</div>
+          <div class="check-row"><span class="cross-mark">✗</span>Sin estadísticas</div>
+        </div>
+
+        <a href="#" class="btn-ghost" style="width:100%;justify-content:center;border-radius:14px;padding:13px;">
+          Empezar gratis
+        </a>
+      </div>
+
+      <!-- BASIC -->
+      <div class="glass reveal d1" style="border-radius:24px;padding:32px 28px;">
+        <div style="font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Básico</div>
+        <div style="display:flex;align-items:baseline;gap:4px;">
+          <div class="f-display" style="font-weight:800;font-size:3rem;color:var(--txt);line-height:1;">$19</div>
+          <div style="font-size:.9rem;color:var(--muted);">MXN/mes</div>
+        </div>
+        <div style="font-size:.82rem;color:var(--muted);margin-top:4px;margin-bottom:28px;">menos que una agua fresca</div>
+        <div class="divider" style="margin-bottom:24px;"></div>
+
+        <div style="display:flex;flex-direction:column;gap:0;margin-bottom:32px;">
+          <div class="check-row included"><span class="check-mark">✓</span>20 escaneos al mes</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Calorías + macros básicos</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Sin anuncios</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Historial de 30 días</div>
+          <div class="check-row"><span class="cross-mark">✗</span>Sin anillos visuales</div>
+          <div class="check-row"><span class="cross-mark">✗</span>Sin estadísticas semanales</div>
+        </div>
+
+        <a href="#" class="btn-ghost" style="width:100%;justify-content:center;border-radius:14px;padding:13px;">
+          Elegir Básico
+        </a>
+      </div>
+
+      <!-- PRO (featured) -->
+      <div class="glass-featured reveal d2" style="border-radius:24px;padding:32px 28px;position:relative;">
+        <!-- Badge -->
+        <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);">
+          <div class="badge-pulse f-display" style="padding:7px 18px;border-radius:100px;font-size:.72rem;font-weight:800;letter-spacing:.07em;background:linear-gradient(135deg,#D4AF37,#C5A059);color:#0A192F;white-space:nowrap;">
+            ⭐ El más buscado
+          </div>
+        </div>
+
+        <div style="margin-top:12px;">
+          <div style="font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Pro</div>
+          <div style="display:flex;align-items:baseline;gap:4px;">
+            <div class="f-display" style="font-weight:800;font-size:3rem;color:var(--gold);line-height:1;">$49</div>
+            <div style="font-size:.9rem;color:rgba(197,160,89,.55);">MXN/mes</div>
+          </div>
+          <div style="font-size:.82rem;color:rgba(197,160,89,.5);margin-top:4px;margin-bottom:28px;">menos que 2 cafés de olla</div>
+        </div>
+
+        <div style="height:1px;background:rgba(197,160,89,.18);margin-bottom:24px;"></div>
+
+        <div style="display:flex;flex-direction:column;gap:0;margin-bottom:32px;">
+          <div class="check-row included"><span class="check-mark">✓</span>100 escaneos al mes</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Anillos de macros completos</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Historial fotográfico</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Estadísticas semanales</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Sin anuncios</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Soporte prioritario</div>
+        </div>
+
+        <a href="#" class="btn-primary" style="width:100%;justify-content:center;border-radius:14px;padding:15px;">
+          Elegir Pro — $49 MXN/mes
+        </a>
+      </div>
+    </div>
+
+    <!-- RevenueCat link -->
+    <div class="reveal d3" style="text-align:center;margin-top:28px;">
+      <a href="https://app.revenuecat.com/billing" target="_blank" rel="noopener noreferrer"
+         style="color:var(--muted);font-size:.82rem;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(136,146,176,.35);">
+        Administrar suscripción → RevenueCat Billing Portal
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="footer" style="background:var(--navy);padding:60px 24px 32px;">
+  <div style="max-width:960px;margin:0 auto;">
+
+    <!-- Health disclaimer -->
+    <div class="disclaimer-box reveal" style="padding:20px 24px;margin-bottom:52px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" style="flex-shrink:0;margin-top:1px;">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <circle cx="12" cy="16" r=".5" fill="var(--gold)"/>
+        </svg>
+        <div>
+          <div style="font-weight:700;color:var(--gold);font-size:.82rem;margin-bottom:6px;letter-spacing:.03em;">Aviso Importante de Salud</div>
+          <p style="color:var(--muted);font-size:.83rem;line-height:1.7;">
+            <strong style="color:var(--txt);">CalorIA Scan es una herramienta informativa.</strong>
+            No reemplazamos el consejo médico o de un nutriólogo profesional. Los valores calóricos son aproximaciones
+            basadas en porciones estándar y pueden variar según la preparación y el establecimiento.
+            Consulta a un experto antes de cambiar tu dieta, especialmente si tienes condiciones de salud específicas.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer columns -->
+    <div class="footer-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;margin-bottom:44px;">
+
+      <!-- Brand -->
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <div style="width:34px;height:34px;border-radius:8px;overflow:hidden;flex-shrink:0;">
+            <svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+              <rect width="34" height="34" rx="7" fill="#112240"/>
+              <path d="M17 4 C13.5 4 11 8 11 14 C11 20 14 26 17 28 C20 26 23 20 23 14 C23 8 20.5 4 17 4Z" fill="#C5A059" opacity=".9"/>
+              <circle cx="14.5" cy="12" r="1.2" fill="#B8860B"/>
+              <circle cx="17"   cy="11" r="1.2" fill="#B8860B"/>
+              <circle cx="19.5" cy="12" r="1.2" fill="#B8860B"/>
+              <circle cx="14.5" cy="16" r="1.2" fill="#B8860B"/>
+              <circle cx="17"   cy="15" r="1.2" fill="#B8860B"/>
+              <circle cx="19.5" cy="16" r="1.2" fill="#B8860B"/>
+              <circle cx="14.5" cy="20" r="1.2" fill="#B8860B"/>
+              <circle cx="17"   cy="19" r="1.2" fill="#B8860B"/>
+              <circle cx="19.5" cy="20" r="1.2" fill="#B8860B"/>
+              <path d="M17 28 C15 30 12.5 30.5 11.5 28.5 C13 27 15 27 17 28Z" fill="#256B25"/>
+              <path d="M17 28 C19 30 21.5 30.5 22.5 28.5 C21 27 19 27 17 28Z" fill="#256B25"/>
+              <rect x="16" y="28" width="2" height="3" rx=".5" fill="#8B5E0A"/>
+            </svg>
+          </div>
+          <span class="f-display" style="font-weight:800;font-size:1rem;">
+            <span style="color:var(--gold);">CalorIA</span><span style="color:var(--txt);">Scan</span>
+          </span>
+        </div>
+        <p style="color:var(--muted);font-size:.83rem;line-height:1.7;max-width:220px;">
+          La primera IA pensada para la cocina mexicana. Hecho con 🌮 en México.
+        </p>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h4 class="f-display" style="font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;">Legal</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+          <li><a href="#" style="color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">Aviso de Privacidad (ARCO)</a></li>
+          <li><a href="#" style="color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">Términos y Condiciones</a></li>
+          <li><a href="#" style="color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">Política de Cookies</a></li>
+          <li>
+            <a href="https://app.revenuecat.com/billing" target="_blank" rel="noopener noreferrer"
+               style="color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s;"
+               onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">
+              Administrar Suscripción ↗
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 class="f-display" style="font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;">Contacto</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+          <li><a href="mailto:hola@caloriascan.mx" style="color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">hola@caloriascan.mx</a></li>
+          <li><a href="#" style="color:var(--muted);font-size:.85rem;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">Centro de Soporte</a></li>
+          <li>
+            <div style="display:flex;gap:10px;margin-top:6px;">
+              <!-- Instagram -->
+              <a href="#" class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8892B0" stroke-width="2">
+                  <rect x="2" y="2" width="20" height="20" rx="5"/>
+                  <circle cx="12" cy="12" r="5"/>
+                  <circle cx="17.5" cy="6.5" r="1" fill="#8892B0" stroke="none"/>
+                </svg>
+              </a>
+              <!-- TikTok -->
+              <a href="#" class="social-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#8892B0">
+                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05A6.34 6.34 0 003.15 15.3a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V9a8.16 8.16 0 004.77 1.52V7.07a4.85 4.85 0 01-1.01-.38z"/>
+                </svg>
+              </a>
+              <!-- X / Twitter -->
+              <a href="#" class="social-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#8892B0">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider" style="margin-bottom:24px;"></div>
+
+    <!-- Bottom bar -->
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;">
+      <p style="color:var(--muted);font-size:.78rem;">
+        © 2025 CalorIA Scan. Todos los derechos reservados. Hecho en México 🇲🇽
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+  // ── Scroll reveal ──
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  // ── Navbar on scroll ──
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.style.borderBottomColor = window.scrollY > 60
+      ? 'rgba(197,160,89,.13)'
+      : 'rgba(197,160,89,.07)';
+  }, { passive: true });
+</script>
+</body>
+</html>
