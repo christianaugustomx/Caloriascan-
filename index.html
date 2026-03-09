@@ -895,12 +895,15 @@
         <div class="divider" style="margin-bottom:24px;"></div>
 
         <div style="display:flex;flex-direction:column;gap:0;margin-bottom:32px;">
-          <div class="check-row included"><span class="check-mark">✓</span>5 escaneos al mes</div>
-          <div class="check-row included"><span class="check-mark">✓</span>Calorías básicas</div>
-          <div class="check-row included"><span class="check-mark">✓</span>Historial de 7 días</div>
-          <div class="check-row"><span class="cross-mark">✗</span>Con anuncios</div>
-          <div class="check-row"><span class="cross-mark">✗</span>Sin anillos de macros</div>
-          <div class="check-row"><span class="cross-mark">✗</span>Sin estadísticas</div>
+          <div class="check-row included"><span class="check-mark">✓</span>15 análisis al mes</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Identificación de alimentos</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Estimado de calorías y macros</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Historial de comidas</div>
+          <div class="check-row"><span class="cross-mark">✗</span>Mis favoritos</div>
+          <div class="check-row"><span class="cross-mark">✗</span>Seguimiento de objetivos</div>
+          <div class="check-row"><span class="cross-mark">✗</span>Estadísticas semanales</div>
+          <div class="check-row"><span class="cross-mark">✗</span>Comidas más frecuentes</div>
+          <div class="check-row"><span class="cross-mark">✗</span>Exportar reporte PDF</div>
         </div>
 
         <a href="#" class="btn-ghost" style="width:100%;justify-content:center;border-radius:14px;padding:13px;">
@@ -919,12 +922,15 @@
         <div class="divider" style="margin-bottom:24px;"></div>
 
         <div style="display:flex;flex-direction:column;gap:0;margin-bottom:32px;">
-          <div class="check-row included"><span class="check-mark">✓</span>20 escaneos al mes</div>
-          <div class="check-row included"><span class="check-mark">✓</span>Calorías + macros básicos</div>
-          <div class="check-row included"><span class="check-mark">✓</span>Sin anuncios</div>
-          <div class="check-row included"><span class="check-mark">✓</span>Historial de 30 días</div>
-          <div class="check-row"><span class="cross-mark">✗</span>Sin anillos visuales</div>
-          <div class="check-row"><span class="cross-mark">✗</span>Sin estadísticas semanales</div>
+          <div class="check-row included"><span class="check-mark">✓</span>20 análisis al mes</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Identificación de alimentos</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Estimado de calorías y macros</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Historial de comidas</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Mis favoritos</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Seguimiento de objetivos</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Estadísticas semanales</div>
+          <div class="check-row"><span class="cross-mark">✗</span>Comidas más frecuentes</div>
+          <div class="check-row"><span class="cross-mark">✗</span>Exportar reporte PDF</div>
         </div>
 
         <a href="#" class="btn-ghost" style="width:100%;justify-content:center;border-radius:14px;padding:13px;">
@@ -953,12 +959,15 @@
         <div style="height:1px;background:rgba(255,184,48,.18);margin-bottom:24px;"></div>
 
         <div style="display:flex;flex-direction:column;gap:0;margin-bottom:32px;">
-          <div class="check-row included"><span class="check-mark">✓</span>100 escaneos al mes</div>
-          <div class="check-row included"><span class="check-mark">✓</span>Anillos de macros completos</div>
-          <div class="check-row included"><span class="check-mark">✓</span>Historial fotográfico</div>
+          <div class="check-row included"><span class="check-mark">✓</span>100 análisis al mes</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Identificación de alimentos</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Estimado de calorías y macros</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Historial de comidas</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Mis favoritos</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Seguimiento de objetivos</div>
           <div class="check-row included"><span class="check-mark">✓</span>Estadísticas semanales</div>
-          <div class="check-row included"><span class="check-mark">✓</span>Sin anuncios</div>
-          <div class="check-row included"><span class="check-mark">✓</span>Soporte prioritario</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Comidas más frecuentes (30 días)</div>
+          <div class="check-row included"><span class="check-mark">✓</span>Exportar reporte PDF para nutriólogo</div>
         </div>
 
         <a href="#" class="btn-primary" style="width:100%;justify-content:center;border-radius:14px;padding:15px;">
@@ -1122,6 +1131,109 @@
       ? 'rgba(255,184,48,.13)'
       : 'rgba(255,184,48,.07)';
   }, { passive: true });
+</script>
+
+<!-- ============================================================
+     DEBUG PANEL — only visible on localhost or ?debug=true
+     REMOVE BEFORE LAUNCH (or keep, it won't show in production)
+     ============================================================ -->
+<script>
+(function () {
+  const isDev = new URLSearchParams(location.search).get('debug') === 'true';
+  if (!isDev) return;
+
+  // ── Panel HTML ──
+  const panel = document.createElement('div');
+  panel.id = 'debug-panel';
+  panel.innerHTML = `
+    <div id="dbg-toggle" title="Debug Panel" style="
+      position:fixed;bottom:20px;right:20px;z-index:9999;
+      width:44px;height:44px;border-radius:50%;
+      background:#0A192F;border:2px solid #FFB830;
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.5);
+      font-size:20px;user-select:none;">🛠️</div>
+    <div id="dbg-box" style="
+      display:none;position:fixed;bottom:74px;right:20px;z-index:9998;
+      width:280px;background:#0A192F;border:1px solid rgba(255,184,48,.35);
+      border-radius:14px;padding:18px;box-shadow:0 8px 40px rgba(0,0,0,.6);
+      font-family:monospace;font-size:12px;color:#CCD6F6;">
+      <div style="color:#FFB830;font-weight:700;font-size:13px;margin-bottom:12px;letter-spacing:.05em;">
+        🛠️ DEBUG PANEL
+      </div>
+      <div id="dbg-storage-info" style="
+        background:#112240;border-radius:8px;padding:10px;margin-bottom:12px;
+        max-height:120px;overflow-y:auto;color:#8892B0;font-size:11px;line-height:1.6;">
+      </div>
+      <button id="dbg-reset-btn" style="
+        width:100%;padding:10px;border-radius:8px;
+        background:rgba(255,184,48,.15);border:1px solid rgba(255,184,48,.4);
+        color:#FFB830;font-family:monospace;font-size:12px;font-weight:700;
+        cursor:pointer;letter-spacing:.05em;transition:background .2s;">
+        ⚡ RESET TEST DATA
+      </button>
+      <div id="dbg-status" style="
+        margin-top:8px;text-align:center;font-size:11px;color:#8892B0;min-height:16px;">
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,184,48,.1);
+        color:#8892B0;font-size:10px;">
+        Solo visible con ?debug=true en la URL
+      </div>
+    </div>
+  `;
+  document.body.appendChild(panel);
+
+  const toggle  = document.getElementById('dbg-toggle');
+  const box     = document.getElementById('dbg-box');
+  const resetBtn = document.getElementById('dbg-reset-btn');
+  const status  = document.getElementById('dbg-status');
+  const storageInfo = document.getElementById('dbg-storage-info');
+
+  function refreshStorageInfo() {
+    const lsKeys = Object.keys(localStorage);
+    const ssKeys = Object.keys(sessionStorage);
+    const cookieCount = document.cookie ? document.cookie.split(';').length : 0;
+    storageInfo.innerHTML = lsKeys.length === 0 && ssKeys.length === 0 && cookieCount === 0
+      ? '<span style="color:#4a5568;">No hay datos almacenados</span>'
+      : [
+          lsKeys.length   ? `<b style="color:#CCD6F6;">localStorage</b> (${lsKeys.length}): ${lsKeys.join(', ')}` : '',
+          ssKeys.length   ? `<b style="color:#CCD6F6;">sessionStorage</b> (${ssKeys.length}): ${ssKeys.join(', ')}` : '',
+          cookieCount > 0 ? `<b style="color:#CCD6F6;">Cookies</b>: ${cookieCount}` : ''
+        ].filter(Boolean).join('<br>');
+  }
+
+  toggle.addEventListener('click', () => {
+    const open = box.style.display === 'block';
+    box.style.display = open ? 'none' : 'block';
+    if (!open) refreshStorageInfo();
+  });
+
+  resetBtn.addEventListener('mouseover', () => {
+    resetBtn.style.background = 'rgba(255,184,48,.28)';
+  });
+  resetBtn.addEventListener('mouseout', () => {
+    resetBtn.style.background = 'rgba(255,184,48,.15)';
+  });
+
+  resetBtn.addEventListener('click', () => {
+    // Clear all local/session storage
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // Clear all cookies for this domain
+    document.cookie.split(';').forEach(c => {
+      const name = c.trim().split('=')[0];
+      document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+    });
+
+    refreshStorageInfo();
+    status.style.color = '#4ade80';
+    status.textContent = '✓ Datos de prueba eliminados';
+    setTimeout(() => { status.textContent = ''; }, 3000);
+  });
+
+  refreshStorageInfo();
+})();
 </script>
 </body>
 </html>
