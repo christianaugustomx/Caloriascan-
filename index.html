@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CalorIA Scan — Escanea. Aprende. Come mejor.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════
    CALORIA SCAN — TALAVERA & GLASSMORPHISM REDESIGN
@@ -45,11 +46,11 @@
   --fat: #CC5500;
 
   /* Glassmorphism */
-  --glass-bg: rgba(255,255,255,0.55);
-  --glass-border: rgba(255,255,255,0.6);
-  --glass-blur: 18px;
-  --glass-strong: rgba(255,255,255,0.72);
-  --glass-shadow: 0 8px 32px rgba(0,71,171,0.08);
+  --glass-bg: rgba(255,255,255,0.60);
+  --glass-border: rgba(255,255,255,0.65);
+  --glass-blur: 10px;
+  --glass-strong: rgba(255,255,255,0.78);
+  --glass-shadow: 0 4px 20px rgba(0,71,171,0.07);
 
   /* Ceramic */
   --ceramic-highlight: rgba(255,255,255,0.7);
@@ -78,12 +79,8 @@ body {
   /* Talavera tile grid background */
   background-image:
     linear-gradient(rgba(0,71,171,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,71,171,0.03) 1px, transparent 1px),
-    linear-gradient(45deg, rgba(204,85,0,0.012) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(204,85,0,0.012) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgba(204,85,0,0.012) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(204,85,0,0.012) 75%);
-  background-size: 40px 40px, 40px 40px, 20px 20px, 20px 20px, 20px 20px, 20px 20px;
+    linear-gradient(90deg, rgba(0,71,171,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 /* ═══════ TALAVERA TILE STRIP ═══════ */
@@ -98,10 +95,12 @@ body {
 }
 
 /* ═══════ TYPOGRAPHY ═══════ */
-h1, h2, h3 { font-family: 'DM Serif Display', serif; }
+h1, h2, h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: -0.5px; }
+h1 { font-weight: 800; }
 .accent-cobalt { color: var(--cobalt); }
 .accent-burnt  { color: var(--burnt); }
 .accent-cactus { color: var(--cactus); }
+.accent-ia     { color: var(--burnt); font-weight: inherit; }
 
 /* ═══════ GLASSMORPHISM ═══════ */
 .glass {
@@ -183,8 +182,8 @@ h1, h2, h3 { font-family: 'DM Serif Display', serif; }
 }
 .nav-logo {
   display: flex; align-items: center; gap: 10px;
-  font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--cobalt);
-  text-decoration: none;
+  font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 800; color: var(--cobalt);
+  text-decoration: none; letter-spacing: -0.5px;
 }
 .nav-logo-icon {
   width: 54px; height: 54px; border-radius: 14px;
@@ -258,7 +257,7 @@ h1, h2, h3 { font-family: 'DM Serif Display', serif; }
   position: relative; z-index: 2; max-width: 700px; margin: 0 auto;
 }
 .hero-sub {
-  font-family: 'DM Serif Display', serif; font-style: italic;
+  font-family: 'DM Sans', sans-serif; font-style: italic; font-weight: 500;
   font-size: clamp(16px, 2.5vw, 20px); color: var(--text-mid);
   margin-top: 18px; position: relative; z-index: 2;
 }
@@ -287,12 +286,8 @@ h1, h2, h3 { font-family: 'DM Serif Display', serif; }
 .phone-mock {
   width: 280px; min-height: 560px;
   border-radius: var(--radius-xl);
-  background: var(--cream);
-  background-image:
-    linear-gradient(rgba(0,71,171,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,71,171,0.025) 1px, transparent 1px);
-  background-size: 40px 40px;
-  box-shadow: 0 24px 60px rgba(0,71,171,0.12), 0 4px 20px rgba(0,0,0,0.06);
+  background: #F5F5F7;
+  box-shadow: 0 20px 50px rgba(0,71,171,0.12), 0 4px 16px rgba(0,0,0,0.06);
   overflow: hidden; position: relative;
   transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
 }
@@ -332,9 +327,9 @@ h1, h2, h3 { font-family: 'DM Serif Display', serif; }
   background: var(--cream-warm); border-radius: 12px; flex-shrink: 0;
 }
 .food-info { flex: 1; }
-.food-name { font-family: 'DM Serif Display', serif; font-size: 14px; color: var(--text-dark); }
+.food-name { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: var(--text-dark); }
 .food-meta { font-size: 11px; color: var(--text-light); margin-top: 1px; }
-.food-cal { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--cobalt); text-align: right; line-height: 1.2; }
+.food-cal { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; color: var(--cobalt); text-align: right; line-height: 1.2; }
 .food-cal span { font-family: 'DM Sans'; font-size: 10px; color: var(--text-light); font-weight: 400; }
 
 /* ═══════ MACRO PILLS ═══════ */
@@ -415,7 +410,7 @@ h1, h2, h3 { font-family: 'DM Serif Display', serif; }
 .step-number {
   width: 44px; height: 44px; border-radius: 50%; margin: 0 auto 18px;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'DM Serif Display', serif; font-size: 20px;
+  font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: 20px;
   color: var(--text-on-cobalt);
   background: linear-gradient(180deg, var(--cobalt-light) 0%, var(--cobalt) 100%);
   box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 -2px 4px rgba(0,0,0,0.1) inset,
@@ -446,7 +441,7 @@ h1, h2, h3 { font-family: 'DM Serif Display', serif; }
 }
 .testimonial-card::before {
   content: '\201C'; position: absolute; top: 16px; left: 20px;
-  font-family: 'DM Serif Display', serif; font-size: 48px;
+  font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: 56px;
   color: var(--cobalt); opacity: 0.15; line-height: 1;
 }
 .testimonial-text { font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 16px; font-style: italic; }
@@ -496,8 +491,8 @@ footer {
 }
 .footer-inner { max-width: 1100px; margin: 0 auto; }
 .footer-logo {
-  font-family: 'DM Serif Display', serif; font-size: 24px;
-  color: var(--cobalt); margin-bottom: 16px;
+  font-family: 'DM Sans', sans-serif; font-size: 22px; font-weight: 800;
+  color: var(--cobalt); margin-bottom: 16px; letter-spacing: -0.5px;
 }
 .footer-links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
 .footer-links a { font-size: 13px; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
@@ -510,10 +505,15 @@ footer {
   to   { opacity: 1; transform: translateY(0); }
 }
 .animate-in {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22,1,0.36,1);
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22,1,0.36,1);
+  will-change: opacity, transform;
 }
-.animate-in.visible { opacity: 1; transform: translateY(0); }
+.animate-in.visible { opacity: 1; transform: translateY(0); will-change: auto; }
+
+/* ═══════ PERFORMANCE ═══════ */
+.section { contain: layout style; }
+.feature-card, .step-card, .testimonial-card, .pricing-card { contain: layout style paint; }
 
 /* ═══════ RESPONSIVE ═══════ */
 @media (max-width: 768px) {
@@ -559,8 +559,8 @@ footer {
   min-width: 150px;
 }
 .stat-number {
-  font-family: 'DM Serif Display', serif;
-  font-size: 32px; color: var(--cobalt); line-height: 1;
+  font-family: 'DM Sans', sans-serif; font-weight: 800;
+  font-size: 32px; color: var(--cobalt); line-height: 1; letter-spacing: -1px;
 }
 .stat-label { font-size: 12px; color: var(--text-light); margin-top: 4px; }
 
@@ -573,8 +573,8 @@ footer {
 }
 .mobile-nav.open { display: flex; }
 .mobile-nav a {
-  font-family: 'DM Serif Display', serif; font-size: 28px;
-  color: var(--cobalt); text-decoration: none;
+  font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: 26px;
+  color: var(--cobalt); text-decoration: none; letter-spacing: -0.5px;
 }
 .mobile-nav-close {
   position: absolute; top: 20px; right: 20px;
@@ -612,11 +612,11 @@ footer {
   letter-spacing: 0.5px; white-space: nowrap;
   box-shadow: 0 2px 8px rgba(0,71,171,0.3);
 }
-.pricing-tier { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text-dark); margin-bottom: 8px; }
-.pricing-price { font-family: 'DM Serif Display', serif; font-size: 48px; color: var(--cobalt); line-height: 1; }
+.pricing-tier { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 22px; color: var(--text-dark); margin-bottom: 8px; }
+.pricing-price { font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: 48px; color: var(--cobalt); line-height: 1; letter-spacing: -2px; }
 .pricing-price .currency { font-size: 20px; vertical-align: super; }
 .pricing-period { font-size: 13px; color: var(--text-light); margin-top: 4px; }
-.pricing-tagline { font-size: 12px; color: var(--burnt); font-style: italic; margin-top: 2px; font-family: 'DM Serif Display', serif; }
+.pricing-tagline { font-size: 12px; color: var(--burnt); font-style: italic; margin-top: 2px; font-family: 'DM Sans', sans-serif; font-weight: 500; }
 .pricing-features { list-style: none; padding: 0; margin: 24px 0; text-align: left; }
 .pricing-features li {
   display: flex; align-items: center; gap: 8px;
@@ -651,7 +651,7 @@ footer {
   <div class="nav-inner">
     <a href="#" class="nav-logo">
       <div class="nav-logo-icon"><img src="assets/Icon/app_icon.png" alt="CalorIA Scan"></div>
-      CalorIA
+      Calor<span class="accent-ia">IA</span>
     </a>
     <div class="nav-links">
       <a href="#features">Funciones</a>
@@ -708,246 +708,255 @@ footer {
   </div>
 
   <div class="phones-showcase">
-    <!-- Phone 1: Home -->
+
+    <!-- ══ PHONE 1: Home Screen ══ -->
     <div class="phone-container animate-in">
-      <div class="phone-mock">
-        <div class="phone-notch"></div>
-        <div class="tile-strip"></div>
-        <div class="phone-mock-inner">
-          <!-- App bar -->
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+      <div class="phone-mock" style="display:flex;flex-direction:column;">
+        <!-- Dark navy header -->
+        <div style="background:linear-gradient(180deg,#0B1E4A 0%,#0D2459 100%);padding:0 0 18px;flex-shrink:0;">
+          <div class="tile-strip" style="opacity:0.9;"></div>
+          <div style="padding:12px 16px 0;display:flex;align-items:center;justify-content:space-between;">
             <div style="display:flex;align-items:center;gap:8px;">
-              <div class="app-icon-sm"><img src="assets/Icon/app_icon.png" alt="CalorIA"></div>
-              <span style="font-family:'DM Serif Display',serif;font-size:16px;color:var(--cobalt);">CalorIA</span>
+              <div style="width:28px;height:28px;border-radius:8px;overflow:hidden;flex-shrink:0;"><img src="assets/Icon/app_icon.png" style="width:100%;height:100%;object-fit:cover;" alt=""></div>
+              <span style="font-size:14px;font-weight:800;color:#fff;letter-spacing:-0.3px;">Calor<span style="color:#F5A623;">IA</span> Scan</span>
             </div>
-            <div style="width:28px;height:28px;border-radius:50%;background:var(--glass-bg);border:0.5px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:12px;">👤</div>
+            <div style="color:rgba(255,255,255,0.5);font-size:16px;">⚙</div>
           </div>
-
-          <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--text-dark);">Buenos dias,</div>
-          <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--cobalt);margin-bottom:16px;">Chris</div>
-
-          <!-- Daily summary -->
-          <div class="glass-strong" style="padding:16px;margin-bottom:16px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="padding:14px 16px 0;">
+            <div style="font-size:18px;font-weight:800;color:#fff;letter-spacing:-0.5px;">Buenos días, Chris</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;">¿Qué vas a comer hoy?</div>
+          </div>
+        </div>
+        <!-- Light content -->
+        <div style="background:#F2F2F7;padding:12px;flex:1;overflow:hidden;">
+          <!-- HOY card -->
+          <div style="background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 1px 6px rgba(0,0,0,0.06);">
+            <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#999;margin-bottom:6px;">HOY</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
               <div>
-                <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);">HOY</div>
-                <div style="font-family:'DM Serif Display',serif;font-size:32px;color:var(--cobalt);line-height:1;">1,420</div>
-                <div style="font-size:11px;color:var(--text-light);">de 2,100 kcal</div>
+                <div style="font-size:30px;font-weight:800;color:#0047AB;line-height:1;letter-spacing:-1px;">1,055</div>
+                <div style="font-size:10px;color:#999;margin-top:2px;">de 2,000 kcal</div>
               </div>
-              <div style="position:relative;width:64px;height:64px;">
-                <svg width="64" height="64" viewBox="0 0 64 64">
-                  <circle cx="32" cy="32" r="26" fill="none" stroke="var(--cream-deep)" stroke-width="6"/>
-                  <circle cx="32" cy="32" r="26" fill="none" stroke="var(--carbs)" stroke-width="6" stroke-dasharray="82 82" stroke-dashoffset="0" transform="rotate(-90 32 32)" stroke-linecap="round"/>
-                  <circle cx="32" cy="32" r="26" fill="none" stroke="var(--protein)" stroke-width="6" stroke-dasharray="40 124" stroke-dashoffset="-82" transform="rotate(-90 32 32)" stroke-linecap="round"/>
-                  <circle cx="32" cy="32" r="26" fill="none" stroke="var(--fat)" stroke-width="6" stroke-dasharray="24 140" stroke-dashoffset="-122" transform="rotate(-90 32 32)" stroke-linecap="round"/>
+              <div style="position:relative;width:58px;height:58px;">
+                <svg width="58" height="58" viewBox="0 0 58 58">
+                  <circle cx="29" cy="29" r="24" fill="none" stroke="#EEE" stroke-width="5"/>
+                  <circle cx="29" cy="29" r="24" fill="none" stroke="#D4A420" stroke-width="5" stroke-dasharray="60 91" transform="rotate(-90 29 29)" stroke-linecap="round"/>
+                  <circle cx="29" cy="29" r="24" fill="none" stroke="#2D8C6B" stroke-width="5" stroke-dasharray="42 109" stroke-dashoffset="-60" transform="rotate(-90 29 29)" stroke-linecap="round"/>
+                  <circle cx="29" cy="29" r="24" fill="none" stroke="#CC5500" stroke-width="5" stroke-dasharray="30 121" stroke-dashoffset="-102" transform="rotate(-90 29 29)" stroke-linecap="round"/>
                 </svg>
-                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:700;color:var(--cobalt);">67%</div>
               </div>
             </div>
-            <div class="macro-row" style="margin-top:10px;">
-              <div class="macro-pill"><div class="macro-dot" style="background:var(--carbs)"></div><div class="macro-label">Carbos</div><div class="macro-val">142g</div></div>
-              <div class="macro-pill"><div class="macro-dot" style="background:var(--protein)"></div><div class="macro-label">Prot</div><div class="macro-val">85g</div></div>
-              <div class="macro-pill"><div class="macro-dot" style="background:var(--fat)"></div><div class="macro-label">Grasa</div><div class="macro-val">48g</div></div>
+            <div style="display:flex;gap:5px;margin-top:10px;">
+              <div style="flex:1;background:#FFFBEE;border-radius:8px;padding:5px 7px;display:flex;align-items:center;gap:3px;">
+                <div style="width:5px;height:5px;border-radius:50%;background:#D4A420;flex-shrink:0;"></div>
+                <div style="font-size:8px;color:#999;">Carbos</div>
+                <div style="font-size:10px;font-weight:700;color:#333;margin-left:auto;">77g</div>
+              </div>
+              <div style="flex:1;background:#EDFAF4;border-radius:8px;padding:5px 7px;display:flex;align-items:center;gap:3px;">
+                <div style="width:5px;height:5px;border-radius:50%;background:#2D8C6B;flex-shrink:0;"></div>
+                <div style="font-size:8px;color:#999;">Prot</div>
+                <div style="font-size:10px;font-weight:700;color:#333;margin-left:auto;">68g</div>
+              </div>
+              <div style="flex:1;background:#FFF3EC;border-radius:8px;padding:5px 7px;display:flex;align-items:center;gap:3px;">
+                <div style="width:5px;height:5px;border-radius:50%;background:#CC5500;flex-shrink:0;"></div>
+                <div style="font-size:8px;color:#999;">Grasa</div>
+                <div style="font-size:10px;font-weight:700;color:#333;margin-left:auto;">54g</div>
+              </div>
             </div>
           </div>
-
-          <!-- Food cards -->
-          <div style="font-family:'DM Serif Display',serif;font-size:14px;color:var(--text-dark);margin-bottom:10px;">Comidas recientes</div>
-
-          <div class="food-card">
-            <div class="food-card-row">
-              <div class="food-emoji">🌮</div>
-              <div class="food-info">
-                <div class="food-name">Tacos al Pastor</div>
-                <div class="food-meta">3 tacos · 12:30 PM</div>
+          <!-- Score card -->
+          <div style="background:#fff;border-radius:14px;padding:12px;margin-bottom:10px;box-shadow:0 1px 6px rgba(0,0,0,0.06);">
+            <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#999;margin-bottom:8px;">PUNTAJE CALORIA™ HOY</div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="position:relative;width:50px;height:50px;">
+                <svg width="50" height="50" viewBox="0 0 50 50">
+                  <circle cx="25" cy="25" r="20" fill="none" stroke="#EEE" stroke-width="4"/>
+                  <circle cx="25" cy="25" r="20" fill="none" stroke="#D4A420" stroke-width="4" stroke-dasharray="75 51" transform="rotate(-90 25 25)" stroke-linecap="round"/>
+                </svg>
+                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+                  <div style="font-size:14px;font-weight:800;color:#D4A420;line-height:1;">56</div>
+                  <div style="font-size:6px;color:#999;">VAS BIEN</div>
+                </div>
               </div>
-              <div class="food-cal">485<br><span>kcal</span></div>
+              <div style="flex:1;">
+                <div style="display:inline-flex;align-items:center;gap:3px;background:#FFF3EC;border-radius:20px;padding:3px 8px;margin-bottom:6px;">
+                  <span style="font-size:10px;">🔥</span>
+                  <span style="font-size:9px;font-weight:700;color:#CC5500;">1 día</span>
+                  <span style="font-size:7px;color:#999;margin-left:2px;">RACHA</span>
+                </div>
+                <div style="display:flex;gap:2px;">
+                  <div style="flex:1;text-align:center;"><div style="width:16px;height:16px;border-radius:50%;background:#EEE;margin:0 auto;display:flex;align-items:center;justify-content:center;"><span style="font-size:6px;color:#ccc;">—</span></div><div style="font-size:6px;color:#ccc;margin-top:2px;">L</div></div>
+                  <div style="flex:1;text-align:center;"><div style="width:16px;height:16px;border-radius:50%;background:#EEE;margin:0 auto;display:flex;align-items:center;justify-content:center;"><span style="font-size:6px;color:#ccc;">—</span></div><div style="font-size:6px;color:#ccc;margin-top:2px;">M</div></div>
+                  <div style="flex:1;text-align:center;"><div style="width:16px;height:16px;border-radius:50%;background:#EEE;margin:0 auto;display:flex;align-items:center;justify-content:center;"><span style="font-size:6px;color:#ccc;">—</span></div><div style="font-size:6px;color:#ccc;margin-top:2px;">X</div></div>
+                  <div style="flex:1;text-align:center;"><div style="width:16px;height:16px;border-radius:50%;background:#EEE;margin:0 auto;"></div><div style="font-size:6px;color:#ccc;margin-top:2px;">J</div></div>
+                  <div style="flex:1;text-align:center;"><div style="width:16px;height:16px;border-radius:50%;background:#EEE;margin:0 auto;"></div><div style="font-size:6px;color:#ccc;margin-top:2px;">V</div></div>
+                  <div style="flex:1;text-align:center;"><div style="width:16px;height:16px;border-radius:50%;background:#EEE;margin:0 auto;"></div><div style="font-size:6px;color:#ccc;margin-top:2px;">S</div></div>
+                  <div style="flex:1;text-align:center;"><div style="width:16px;height:16px;border-radius:50%;background:#D4A420;margin:0 auto;display:flex;align-items:center;justify-content:center;"><span style="font-size:5px;font-weight:700;color:#fff;">56</span></div><div style="font-size:6px;color:#0047AB;font-weight:700;margin-top:2px;">D</div></div>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="food-card">
-            <div class="food-card-row">
-              <div class="food-emoji">🫔</div>
-              <div class="food-info">
-                <div class="food-name">Tamales Oaxaquenos</div>
-                <div class="food-meta">2 piezas · 8:15 AM</div>
-              </div>
-              <div class="food-cal">620<br><span>kcal</span></div>
-            </div>
-          </div>
-
-          <div class="food-card">
-            <div class="food-card-row">
-              <div class="food-emoji">🥑</div>
-              <div class="food-info">
-                <div class="food-name">Guacamole con Totopos</div>
-                <div class="food-meta">1 porcion · Ayer</div>
-              </div>
-              <div class="food-cal">315<br><span>kcal</span></div>
+          <!-- Escanear button -->
+          <div style="background:#0047AB;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:10px;">
+            <span style="font-size:18px;">📷</span>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:#fff;">Escanear comida</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.6);">Tacos, tortas, chilaquiles... lo que sea 🌮</div>
             </div>
           </div>
         </div>
-        <div class="tile-strip" style="position:absolute;bottom:0;left:0;right:0;"></div>
       </div>
       <div style="text-align:center;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cobalt);margin-top:12px;">Inicio</div>
     </div>
 
-    <!-- Phone 2: Scan Result -->
+    <!-- ══ PHONE 2: Dashboard / Recent meals ══ -->
     <div class="phone-container animate-in" style="transition-delay:0.15s;">
-      <div class="phone-mock">
-        <div class="phone-notch"></div>
-        <div class="tile-strip"></div>
-        <div class="phone-mock-inner">
-          <!-- Back -->
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
-            <div style="width:26px;height:26px;border-radius:8px;background:var(--glass-bg);border:0.5px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:12px;">&#8592;</div>
-            <span style="font-family:'DM Serif Display',serif;font-size:16px;color:var(--cobalt);">Resultado</span>
-          </div>
-
-          <!-- Food image -->
-          <div style="height:130px;border-radius:var(--radius-lg);background:linear-gradient(135deg,var(--cream-warm),var(--cream-deep));display:flex;align-items:center;justify-content:center;font-size:56px;margin-bottom:14px;position:relative;overflow:hidden;">
-            🌮
-            <div style="position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,0.7);backdrop-filter:blur(12px);border:0.5px solid rgba(255,255,255,0.6);border-radius:16px;padding:4px 10px;display:flex;align-items:center;gap:4px;">
-              <span style="font-family:'DM Serif Display',serif;font-size:14px;color:var(--cobalt);">485</span>
-              <span style="font-size:9px;color:var(--text-light);">kcal</span>
+      <div class="phone-mock" style="display:flex;flex-direction:column;">
+        <!-- Dark header -->
+        <div style="background:linear-gradient(180deg,#0B1E4A 0%,#0D2459 100%);padding:0 0 14px;flex-shrink:0;">
+          <div class="tile-strip" style="opacity:0.9;"></div>
+          <div style="padding:12px 16px 0;display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:28px;height:28px;border-radius:8px;overflow:hidden;flex-shrink:0;"><img src="assets/Icon/app_icon.png" style="width:100%;height:100%;object-fit:cover;" alt=""></div>
+              <span style="font-size:14px;font-weight:800;color:#fff;letter-spacing:-0.3px;">Calor<span style="color:#F5A623;">IA</span> Scan</span>
             </div>
+            <div style="color:rgba(255,255,255,0.5);font-size:16px;">⚙</div>
           </div>
-
-          <div style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--text-dark);margin-bottom:2px;">Tacos al Pastor</div>
-          <div style="font-size:11px;color:var(--text-light);margin-bottom:14px;">3 tacos · Cerdo marinado, pina, cilantro</div>
-
-          <!-- Macros donut -->
-          <div class="glass-strong" style="padding:14px;">
-            <div style="display:flex;align-items:center;gap:14px;">
-              <div style="position:relative;width:72px;height:72px;flex-shrink:0;">
-                <svg width="72" height="72" viewBox="0 0 72 72">
-                  <circle cx="36" cy="36" r="28" fill="none" stroke="var(--cream-deep)" stroke-width="8"/>
-                  <circle cx="36" cy="36" r="28" fill="none" stroke="var(--carbs)" stroke-width="8" stroke-dasharray="80 96" transform="rotate(-90 36 36)" stroke-linecap="round"/>
-                  <circle cx="36" cy="36" r="28" fill="none" stroke="var(--protein)" stroke-width="8" stroke-dasharray="44 132" stroke-dashoffset="-80" transform="rotate(-90 36 36)" stroke-linecap="round"/>
-                  <circle cx="36" cy="36" r="28" fill="none" stroke="var(--fat)" stroke-width="8" stroke-dasharray="35 141" stroke-dashoffset="-124" transform="rotate(-90 36 36)" stroke-linecap="round"/>
-                </svg>
-                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
-                  <div style="font-family:'DM Serif Display',serif;font-size:16px;color:var(--cobalt);">485</div>
-                  <div style="font-size:8px;color:var(--text-light);">kcal</div>
-                </div>
-              </div>
-              <div style="flex:1;">
-                <div class="macro-pill" style="margin-bottom:4px;"><div class="macro-dot" style="background:var(--carbs)"></div><div class="macro-label">Carbos</div><div class="macro-val">52g</div></div>
-                <div class="macro-pill" style="margin-bottom:4px;"><div class="macro-dot" style="background:var(--protein)"></div><div class="macro-label">Prot</div><div class="macro-val">32g</div></div>
-                <div class="macro-pill"><div class="macro-dot" style="background:var(--fat)"></div><div class="macro-label">Grasa</div><div class="macro-val">18g</div></div>
-              </div>
-            </div>
-          </div>
-
-          <div style="height:12px;"></div>
-
-          <!-- Ingredient chips -->
-          <div style="font-family:'DM Serif Display',serif;font-size:13px;color:var(--text-dark);margin-bottom:8px;">Proteina</div>
-          <div class="chip-group" style="margin-bottom:12px;">
-            <div class="chip active">🐷 Pastor</div>
-            <div class="chip">🐔 Pollo</div>
-            <div class="chip">🥩 Bistec</div>
-          </div>
-          <div style="font-family:'DM Serif Display',serif;font-size:13px;color:var(--text-dark);margin-bottom:8px;">Extras</div>
-          <div class="chip-group" style="margin-bottom:14px;">
-            <div class="chip active">🍍 Pina</div>
-            <div class="chip active">🌿 Cilantro</div>
-            <div class="chip">🧅 Cebolla</div>
-          </div>
-
-          <button class="ceramic-btn primary" style="width:100%;padding:12px;font-size:14px;">&#10003; Registrar comida</button>
         </div>
-        <div class="tile-strip" style="position:absolute;bottom:0;left:0;right:0;"></div>
+        <!-- Light content -->
+        <div style="background:#F2F2F7;padding:12px;flex:1;overflow:hidden;">
+          <!-- Escanear button -->
+          <div style="background:#0047AB;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <span style="font-size:18px;">📷</span>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:#fff;">Escanear comida</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.6);">Tacos, tortas, chilaquiles... lo que sea 🌮</div>
+            </div>
+          </div>
+          <!-- 2x2 grid -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+            <div style="background:#fff;border-radius:12px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,0.05);display:flex;align-items:center;gap:6px;">
+              <span style="font-size:16px;">🕐</span>
+              <span style="font-size:11px;font-weight:600;color:#333;">Historial</span>
+            </div>
+            <div style="background:#fff;border-radius:12px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,0.05);display:flex;align-items:center;gap:6px;">
+              <span style="font-size:16px;">🔥</span>
+              <div><div style="font-size:10px;font-weight:600;color:#333;">Calorías</div><div style="font-size:10px;color:#999;">de hoy</div></div>
+            </div>
+            <div style="background:#fff;border-radius:12px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,0.05);display:flex;align-items:center;gap:6px;">
+              <span style="font-size:16px;">👤</span>
+              <span style="font-size:11px;font-weight:600;color:#333;">Mi perfil</span>
+            </div>
+            <div style="background:#fff;border-radius:12px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,0.05);border:1.5px solid rgba(204,85,0,0.2);display:flex;align-items:center;gap:6px;">
+              <span style="font-size:16px;">⭐</span>
+              <span style="font-size:11px;font-weight:600;color:#CC5500;">Planes</span>
+            </div>
+          </div>
+          <!-- Insight -->
+          <div style="background:#fff;border-radius:12px;padding:10px 12px;margin-bottom:10px;display:flex;gap:8px;align-items:flex-start;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+            <span style="font-size:16px;">💡</span>
+            <div>
+              <div style="font-size:11px;font-weight:700;color:#0047AB;">Te falta proteína</div>
+              <div style="font-size:9px;color:#666;margin-top:2px;line-height:1.4;">Te faltan ~48g. Agrega huevo, pollo o frijoles para mejorar tu puntaje.</div>
+            </div>
+          </div>
+          <!-- Comidas recientes -->
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="font-size:12px;font-weight:700;color:#333;">Comidas recientes</div>
+            <div style="font-size:10px;color:#0047AB;font-weight:600;">Ver todo →</div>
+          </div>
+          <div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid #F5F5F5;">
+              <div style="width:36px;height:36px;border-radius:8px;background:#FFE4C4;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🍤</div>
+              <div style="flex:1;"><div style="font-size:11px;font-weight:600;color:#333;">Camarones explosivos</div><div style="font-size:9px;color:#999;">Comida</div></div>
+              <div style="text-align:right;"><div style="font-size:11px;font-weight:700;color:#0047AB;">400 kcal</div><div style="font-size:9px;font-weight:600;color:#2D8C6B;background:#EDFAF4;padding:1px 6px;border-radius:10px;">+92 pts</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid #F5F5F5;">
+              <div style="width:36px;height:36px;border-radius:8px;background:#E8F5EF;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🍏</div>
+              <div style="flex:1;"><div style="font-size:11px;font-weight:600;color:#333;">Manzana verde</div><div style="font-size:9px;color:#999;">Comida</div></div>
+              <div style="text-align:right;"><div style="font-size:11px;font-weight:700;color:#0047AB;">95 kcal</div><div style="font-size:9px;font-weight:600;color:#D4A420;background:#FFFBEE;padding:1px 6px;border-radius:10px;">+19 pts</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;">
+              <div style="width:36px;height:36px;border-radius:8px;background:#F0F0F0;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🥤</div>
+              <div style="flex:1;"><div style="font-size:11px;font-weight:600;color:#333;">Coca-Cola Clásica</div><div style="font-size:9px;color:#999;">Comida</div></div>
+              <div style="text-align:right;"><div style="font-size:11px;font-weight:700;color:#0047AB;">149 kcal</div><div style="font-size:9px;font-weight:600;color:#D4A420;background:#FFFBEE;padding:1px 6px;border-radius:10px;">+30 pts</div></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div style="text-align:center;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cobalt);margin-top:12px;">Resultado</div>
+      <div style="text-align:center;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cobalt);margin-top:12px;">Dashboard</div>
     </div>
 
-    <!-- Phone 3: History -->
+    <!-- ══ PHONE 3: Upgrade / Plans ══ -->
     <div class="phone-container animate-in" style="transition-delay:0.3s;">
-      <div class="phone-mock">
-        <div class="phone-notch"></div>
-        <div class="tile-strip"></div>
-        <div class="phone-mock-inner">
-          <div style="text-align:center;font-family:'DM Serif Display',serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--cobalt);padding:14px 0 18px;">Historial</div>
-
-          <!-- Day selector -->
-          <div style="display:flex;justify-content:center;gap:4px;margin-bottom:16px;">
-            <div style="padding:6px 10px;border-radius:8px;background:var(--glass-bg);border:0.5px solid var(--glass-border);font-size:11px;color:var(--text-light);">Lun</div>
-            <div style="padding:6px 10px;border-radius:8px;background:var(--glass-bg);border:0.5px solid var(--glass-border);font-size:11px;color:var(--text-light);">Mar</div>
-            <div style="padding:6px 10px;border-radius:8px;background:rgba(0,71,171,0.12);border:1.5px solid rgba(0,71,171,0.4);font-size:11px;color:var(--cobalt);font-weight:700;">Mie</div>
-            <div style="padding:6px 10px;border-radius:8px;background:var(--glass-bg);border:0.5px solid var(--glass-border);font-size:11px;color:var(--text-light);">Jue</div>
-            <div style="padding:6px 10px;border-radius:8px;background:var(--glass-bg);border:0.5px solid var(--glass-border);font-size:11px;color:var(--text-light);">Vie</div>
+      <div class="phone-mock" style="display:flex;flex-direction:column;">
+        <!-- Header -->
+        <div style="background:#fff;padding:14px 16px 12px;border-bottom:1px solid #F0F0F0;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-size:16px;color:#999;">←</span>
+          <span style="font-size:13px;font-weight:700;color:#333;">Actualiza a Pro</span>
+          <span style="font-size:11px;color:#0047AB;font-weight:600;">Restaurar</span>
+        </div>
+        <!-- Light content -->
+        <div style="background:#F2F2F7;padding:14px;flex:1;overflow:hidden;">
+          <!-- Logo & headline -->
+          <div style="text-align:center;margin-bottom:14px;">
+            <div style="width:56px;height:56px;border-radius:16px;overflow:hidden;margin:0 auto 10px;box-shadow:0 4px 12px rgba(0,71,171,0.15);"><img src="assets/Icon/app_icon.png" style="width:100%;height:100%;object-fit:cover;" alt=""></div>
+            <div style="font-size:16px;font-weight:800;color:#333;letter-spacing:-0.5px;">Calor<span style="color:#CC5500;">IA</span> Scan <span style="color:#0047AB;">Pro</span></div>
+            <div style="font-size:10px;color:#666;margin-top:3px;">Más análisis. Más inteligencia.<br>Mejores decisiones.</div>
           </div>
-
-          <!-- Summary -->
-          <div class="glass" style="padding:12px;margin-bottom:14px;text-align:center;">
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:2px;">MIERCOLES 10 MARZO</div>
-            <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--cobalt);">1,420 <span style="font-size:12px;color:var(--text-light);font-family:'DM Sans';">/ 2,100 kcal</span></div>
+          <!-- Free plan usage -->
+          <div style="background:#fff;border-radius:12px;padding:12px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+              <div style="display:flex;align-items:center;gap:6px;"><span style="font-size:14px;">🌱</span><span style="font-size:11px;font-weight:600;color:#333;">Plan Gratuito</span></div>
+              <div style="background:#E8F0FE;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:600;color:#0047AB;">0 / 15</div>
+            </div>
+            <div style="height:4px;background:#EEE;border-radius:2px;"><div style="height:4px;background:#0047AB;border-radius:2px;width:0%;"></div></div>
+            <div style="font-size:9px;color:#999;margin-top:5px;">Te quedan 15 de 15 escaneos gratuitos.</div>
           </div>
-
-          <!-- History entries -->
-          <div class="food-card">
-            <div class="food-card-row">
-              <div class="food-emoji" style="background:rgba(0,71,171,0.06);">🌮</div>
-              <div class="food-info">
-                <div class="food-name">Tacos al Pastor</div>
-                <div class="food-meta">Almuerzo · 12:30 PM</div>
-              </div>
-              <div class="food-cal">485<br><span>kcal</span></div>
+          <!-- Comparison table -->
+          <div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+            <div style="display:grid;grid-template-columns:1fr auto auto;padding:8px 12px;border-bottom:1px solid #F5F5F5;">
+              <div></div>
+              <div style="text-align:center;width:44px;font-size:9px;color:#999;display:flex;align-items:center;justify-content:center;gap:3px;">🌱 Gratis</div>
+              <div style="text-align:center;width:44px;background:#0047AB;border-radius:20px;font-size:9px;font-weight:700;color:#fff;padding:4px 6px;display:flex;align-items:center;justify-content:center;gap:2px;">⭐ Pro</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr auto auto;padding:7px 12px;border-bottom:1px solid #F5F5F5;align-items:center;">
+              <div style="font-size:9px;color:#666;">Análisis de imágenes/mes</div>
+              <div style="text-align:center;width:44px;font-size:10px;font-weight:600;color:#333;">15</div>
+              <div style="text-align:center;width:44px;font-size:10px;font-weight:700;color:#0047AB;">250</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr auto auto;padding:7px 12px;border-bottom:1px solid #F5F5F5;align-items:center;">
+              <div style="font-size:9px;color:#666;">Identificación de alimentos</div>
+              <div style="text-align:center;width:44px;font-size:12px;color:#2D8C6B;">✓</div>
+              <div style="text-align:center;width:44px;font-size:12px;color:#0047AB;">✓</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr auto auto;padding:7px 12px;border-bottom:1px solid #F5F5F5;align-items:center;">
+              <div style="font-size:9px;color:#666;">Calorías y macros</div>
+              <div style="text-align:center;width:44px;font-size:12px;color:#2D8C6B;">✓</div>
+              <div style="text-align:center;width:44px;font-size:12px;color:#0047AB;">✓</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr auto auto;padding:7px 12px;border-bottom:1px solid #F5F5F5;align-items:center;">
+              <div style="font-size:9px;color:#666;">Mis favoritos</div>
+              <div style="text-align:center;width:44px;font-size:12px;color:#CCC;">—</div>
+              <div style="text-align:center;width:44px;font-size:12px;color:#0047AB;">✓</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr auto auto;padding:7px 12px;align-items:center;">
+              <div style="font-size:9px;color:#666;">Estadísticas semanales</div>
+              <div style="text-align:center;width:44px;font-size:12px;color:#CCC;">—</div>
+              <div style="text-align:center;width:44px;font-size:12px;color:#0047AB;">✓</div>
             </div>
           </div>
-
-          <div class="food-card">
-            <div class="food-card-row">
-              <div class="food-emoji" style="background:rgba(204,85,0,0.06);">🫔</div>
-              <div class="food-info">
-                <div class="food-name">Tamales Oaxaquenos</div>
-                <div class="food-meta">Desayuno · 8:15 AM</div>
-              </div>
-              <div class="food-cal">620<br><span>kcal</span></div>
-            </div>
-          </div>
-
-          <div class="food-card">
-            <div class="food-card-row">
-              <div class="food-emoji" style="background:rgba(45,140,107,0.06);">🥑</div>
-              <div class="food-info">
-                <div class="food-name">Guacamole con Totopos</div>
-                <div class="food-meta">Snack · 4:00 PM</div>
-              </div>
-              <div class="food-cal">315<br><span>kcal</span></div>
-            </div>
-          </div>
-
-          <div style="height:12px;"></div>
-
-          <!-- Weekly chart -->
-          <div class="glass" style="padding:12px;">
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:8px;">ESTA SEMANA</div>
-            <div style="display:flex;gap:4px;align-items:flex-end;height:60px;">
-              <div style="flex:1;background:var(--cobalt);opacity:0.3;border-radius:4px 4px 0 0;height:45%;"></div>
-              <div style="flex:1;background:var(--cobalt);opacity:0.4;border-radius:4px 4px 0 0;height:62%;"></div>
-              <div style="flex:1;background:var(--cobalt);opacity:0.5;border-radius:4px 4px 0 0;height:78%;"></div>
-              <div style="flex:1;background:var(--cobalt);border-radius:4px 4px 0 0;height:67%;box-shadow:0 0 10px rgba(0,71,171,0.2);"></div>
-              <div style="flex:1;background:var(--cream-deep);border-radius:4px 4px 0 0;height:30%;"></div>
-              <div style="flex:1;background:var(--cream-deep);border-radius:4px 4px 0 0;height:30%;"></div>
-              <div style="flex:1;background:var(--cream-deep);border-radius:4px 4px 0 0;height:30%;"></div>
-            </div>
-            <div style="display:flex;gap:4px;margin-top:4px;">
-              <div style="flex:1;text-align:center;font-size:8px;color:var(--text-light);">L</div>
-              <div style="flex:1;text-align:center;font-size:8px;color:var(--text-light);">M</div>
-              <div style="flex:1;text-align:center;font-size:8px;color:var(--text-light);">M</div>
-              <div style="flex:1;text-align:center;font-size:8px;color:var(--cobalt);font-weight:700;">J</div>
-              <div style="flex:1;text-align:center;font-size:8px;color:var(--text-light);">V</div>
-              <div style="flex:1;text-align:center;font-size:8px;color:var(--text-light);">S</div>
-              <div style="flex:1;text-align:center;font-size:8px;color:var(--text-light);">D</div>
-            </div>
+          <!-- Price CTA -->
+          <div style="margin-top:12px;background:#0047AB;border-radius:14px;padding:12px;text-align:center;">
+            <div style="font-size:10px;color:rgba(255,255,255,0.7);">Solo</div>
+            <div style="font-size:22px;font-weight:800;color:#fff;letter-spacing:-1px;">$79 <span style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.7);">MXN/mes</span></div>
+            <div style="font-size:9px;color:rgba(255,255,255,0.6);font-style:italic;">menos que un combo de tacos</div>
           </div>
         </div>
-        <div class="tile-strip" style="position:absolute;bottom:0;left:0;right:0;"></div>
       </div>
-      <div style="text-align:center;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cobalt);margin-top:12px;">Historial</div>
+      <div style="text-align:center;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cobalt);margin-top:12px;">Planes Pro</div>
     </div>
+
   </div>
 </section>
 
@@ -1043,14 +1052,14 @@ footer {
     <p>Sin sorpresas, sin trucos. Elige el plan que se ajuste a tu estilo de vida.</p>
   </div>
 
-  <div class="pricing-grid">
+  <div class="pricing-grid" style="max-width:720px;margin:0 auto;">
     <!-- Gratuito -->
     <div class="pricing-card animate-in">
       <div class="pricing-tier">Gratuito</div>
       <div class="pricing-price"><span class="currency">$</span>0</div>
       <div class="pricing-period">para siempre</div>
       <ul class="pricing-features">
-        <li><span class="check">&#10003;</span> 10 analisis al mes</li>
+        <li><span class="check">&#10003;</span> 15 analisis al mes</li>
         <li><span class="check">&#10003;</span> Identificacion de alimentos</li>
         <li><span class="check">&#10003;</span> Estimado de calorias y macros</li>
         <li><span class="check">&#10003;</span> Historial de comidas</li>
@@ -1063,33 +1072,13 @@ footer {
       <button class="ceramic-btn ghost">Empezar gratis</button>
     </div>
 
-    <!-- Basico -->
-    <div class="pricing-card animate-in" style="transition-delay:0.1s;">
-      <div class="pricing-tier">Basico</div>
-      <div class="pricing-price"><span class="currency">$</span>45</div>
-      <div class="pricing-period">MXN/mes</div>
-      <div class="pricing-tagline">menos que un combo de tacos</div>
-      <ul class="pricing-features">
-        <li><span class="check">&#10003;</span> 100 analisis al mes</li>
-        <li><span class="check">&#10003;</span> Identificacion de alimentos</li>
-        <li><span class="check">&#10003;</span> Estimado de calorias y macros</li>
-        <li><span class="check">&#10003;</span> Historial de comidas</li>
-        <li><span class="check">&#10003;</span> Mis favoritos</li>
-        <li><span class="check">&#10003;</span> Seguimiento de objetivos</li>
-        <li><span class="check">&#10003;</span> Estadisticas semanales</li>
-        <li class="disabled"><span class="cross">&#10007;</span> Comidas mas frecuentes</li>
-        <li class="disabled"><span class="cross">&#10007;</span> Exportar reporte PDF</li>
-      </ul>
-      <button class="ceramic-btn primary">Elegir Basico</button>
-    </div>
-
     <!-- Pro -->
-    <div class="pricing-card featured animate-in" style="transition-delay:0.2s;">
+    <div class="pricing-card featured animate-in" style="transition-delay:0.1s;">
       <div class="pricing-badge">&#11088; El mas buscado</div>
       <div class="pricing-tier">Pro</div>
-      <div class="pricing-price"><span class="currency">$</span>89</div>
+      <div class="pricing-price"><span class="currency">$</span>79</div>
       <div class="pricing-period">MXN/mes</div>
-      <div class="pricing-tagline">menos que una pizza a domicilio</div>
+      <div class="pricing-tagline">menos que un combo de tacos al mes</div>
       <ul class="pricing-features">
         <li><span class="check">&#10003;</span> 250 analisis al mes</li>
         <li><span class="check">&#10003;</span> Identificacion de alimentos</li>
@@ -1138,7 +1127,7 @@ footer {
 <footer>
   <div class="tile-strip" style="margin-bottom:32px;"></div>
   <div class="footer-inner">
-    <div class="footer-logo">CalorIA Scan</div>
+    <div class="footer-logo">Calor<span class="accent-ia">IA</span> Scan</div>
     <div class="footer-links">
       <a href="privacy-policy.html">Privacidad</a>
       <a href="terms.html">Terminos</a>
@@ -1153,16 +1142,16 @@ footer {
 <script>
 // ═══════ FLOATING NAV SCROLL EFFECT ═══════
 const nav = document.getElementById('mainNav');
-let lastScroll = 0;
+let ticking = false;
 
 window.addEventListener('scroll', () => {
-  const currentScroll = window.pageYOffset;
-  if (currentScroll > 60) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      nav.classList.toggle('scrolled', window.pageYOffset > 60);
+      ticking = false;
+    });
+    ticking = true;
   }
-  lastScroll = currentScroll;
 }, { passive: true });
 
 // ═══════ INTERSECTION OBSERVER (ANIMATE IN) ═══════
